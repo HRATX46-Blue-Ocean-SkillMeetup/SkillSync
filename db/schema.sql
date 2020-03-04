@@ -1,4 +1,8 @@
+SET FOREIGN_KEY_CHECKS=0; 
+
 DROP DATABASE IF EXISTS heroku_7c77d5ad4c092b8;
+
+SET FOREIGN_KEY_CHECKS=1; 
 
 CREATE DATABASE heroku_7c77d5ad4c092b8;
 
@@ -23,17 +27,17 @@ CREATE TABLE skill (
 CREATE TABLE user_skill (
   user_id INT NOT NULL,
   skill_id INT NOT NULL,
-  role ENUM('mentor', 'mentee'),
+  role VARCHAR(8),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
   FOREIGN KEY (skill_id) REFERENCES skill (skill_id)
 );
 
 CREATE TABLE posting (
   posting_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  role ENUM('mentor', 'mentee'),
+  role VARCHAR(8),
   skill_id INT NOT NULL,
   user_id INT NOT NULL,
-  creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  creation_date TIMESTAMP NOT NULL DEFAULT NOW(),
   FOREIGN KEY (skill_id) REFERENCES skill (skill_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
@@ -55,7 +59,7 @@ CREATE TABLE review (
   description TEXT,
   reviewer_id INT NOT NULL,
   user_id INT NOT NULL,
-  review_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  review_date TIMESTAMP NOT NULL DEFAULT NOW(),
   FOREIGN KEY (skill_id) REFERENCES skill (skill_id),
   FOREIGN KEY (user_id) REFERENCES user (user_id),
   FOREIGN KEY (reviewer_id) REFERENCES user (user_id)
@@ -64,7 +68,7 @@ CREATE TABLE review (
 CREATE TABLE message (
   message_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   message_text TEXT,
-  message_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  message_date TIMESTAMP NOT NULL DEFAULT NOW(),
   visited BOOLEAN,
   from_username INT NOT NULL,
   FOREIGN KEY (from_username) REFERENCES user (user_id),
@@ -75,4 +79,5 @@ CREATE TABLE message (
 CREATE TABLE test (
   likes INT
 );
+
 INSERT INTO test (likes) VALUES (5);
