@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Search from "./Search";
 
 export default function App() {
   useEffect(() => {
@@ -12,5 +13,9 @@ export default function App() {
         console.log(error);
       });
   });
-  return <div>Hello World</div>;
+  return (
+    <div>
+      <Search />
+    </div>
+  );
 }

@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+#searchbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+label.sr-only {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+}
+
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+/* .input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+} */
+
+.input-group .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 90%;
+  margin-bottom: 0;
+}
+
+.input-group-btn,
+.input-group .form-control {
+  display: table-cell;
+}
+.input-group-btn {
+  width: 10%;
+  white-space: nowrap;
+  vertical-align: middle;
+  position: relative;
+  font-size: 0;
+  float: right;
+}
+.input-group .form-control:focus {
+  z-index: 3;
+}
+
+form {
+  /* padding-right: 50%; */
+  /* padding-left: 1%; */
+  width: 60%;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.layout-navbar-search-btn {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.main-search {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.brand {
+  width: 35px;
+  height: 35px;
+  background: url(https://images-na.ssl-images-amazon.com/images/I/712C7Vbf9-L._AC_UL1500_.jpg)
+    no-repeat;
+  background-position: center;
+  background-size: 71%;
+}
+
+.hamburger {
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+@media (max-width: 767px) {
+  .input-group .form-control {
+    width: calc(100% - 38px);
+  }
+  .input-group-btn {
+    width: 38px;
+    right: 2%;
+  }
+}
+
+@media (max-width: 500px) {
+  .layout-search-input:focus {
+    font-size: 16px !important;
+  }
+  form {
+    padding: 0;
+  }
+}
