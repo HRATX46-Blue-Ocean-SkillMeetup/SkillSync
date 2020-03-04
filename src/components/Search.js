@@ -7,10 +7,10 @@ const Search = () => {
   const handleChange = e => {
     setSearchTerm(e.target.value);
   };
-  
+
   return (
     <div id="searchbar">
-      <div className="brand"></div>
+      <HamburgerMenu />
       <form role="search" action="/q" acceptCharset="UTF-8" method="GET">
         <div className="search-layout">
           <div className="input-group">
@@ -39,7 +39,7 @@ const Search = () => {
           </div>
         </div>
       </form>
-      <HamburgerMenu />
+      <div className="brand"></div>
     </div>
   );
 };
