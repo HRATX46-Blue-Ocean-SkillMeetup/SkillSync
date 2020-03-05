@@ -1,0 +1,104 @@
+body {
+  background-color: red;
+}
+
+.userProfile-skills-container {
+  display: flex;
+  width: 100%;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userProfile-skills {
+  display: flex;
+  width: 98%;
+  height: 100px;
+  background: #237553;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 1px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 100%;
+}
+.userProfile-skill-container {
+  display: flex;
+  flex-direction: row;
+}
+.userProfile-skill {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 1px;
+  margin: 10px;
+  background: #ffffff;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  color: #656565;
+}
+
+.userProfile-want-to-learn-container {
+  display: flex;
+  width: 100%;
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userProfile-want-to-learn {
+  display: flex;
+  width: 98%;
+  height: 100px;
+  background: #237553;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 1px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 100%;
+}
+
+.userProfile-learn-skill-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.userProfile-learn-skill {
+  display: flex;
+  flex-direction: row;
+  width: 80px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 1px;
+  margin: 10px;
+  background: #ffffff;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  color: #656565;
+}
+

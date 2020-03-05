@@ -52,14 +52,7 @@ module.exports = () => {
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css"
-      }),
-      new webpack.HotModuleReplacementPlugin({
-        devServer: {
-          contentBase: "./dist",
-          hot: true
-        }
-      }),
-      // new webpack.DefinePlugin(envKeys)
+      })
     ]
   };
 };
