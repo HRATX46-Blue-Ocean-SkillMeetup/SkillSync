@@ -46,4 +46,42 @@ app.route("/test").get((req, res) => {
   });
 });
 
+app.get("/search", (req, res) => {
+  console.log(req.query.searchTerm);
+  pool.query(
+    `SELECT * FROM skill WHERE skill LIKE '${req.query.searchTerm}%';`,
+    (err, data) => {
+      if (err) {
+        res.status(404).send("");
+      }
+      res.status(200).send(data);
+    }
+  );
+});
+
+app.get("/postings", (req, res) => {
+  console.log(req.query.skill_id);
+  pool.query(
+    `SELECT
+    s.skill,
+    u.username,
+    u.location,
+    u.user_photo,
+    p.role,
+    p.creation_date
+    FROM posting p 
+    LEFT JOIN user u
+      on p.user_id=u.user_id
+    LEFT JOIN skill s
+      on p.skill_id=s.skill_id
+    WHERE p.skill_id = '${req.query.skill_id}';`,
+    (err, data) => {
+      if (err) {
+        res.status(404).send("");
+      }
+      res.status(200).send(data);
+    }
+  );
+});
+
 app.listen(port, () => console.log("port " + port + " is on"));
