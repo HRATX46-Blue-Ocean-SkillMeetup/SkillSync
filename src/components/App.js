@@ -24,7 +24,12 @@ export default function App() {
       .catch(function(error) {
         console.log(error);
       });
+
+    axios.get("/postingData/15").then(function(response) {
+      setActivity(response.data.skill);
+    });
   });
+
   return (
     <div>
       <div>Hello World</div>
@@ -37,7 +42,6 @@ export default function App() {
         rating={rating}
       /> */}
       {/* <NewPostForm skills={skills} /> */}
-      <PostingResult mentor={mentor} activity={activity} photo={photo} />
     </div>
   );
 }

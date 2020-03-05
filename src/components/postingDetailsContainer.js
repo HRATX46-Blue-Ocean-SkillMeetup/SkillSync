@@ -20,3 +20,18 @@ function PostingDetailsContainer(props) {
 }
 
 export default PostingDetailsContainer;
+"10",
+  "mentee",
+  "18",
+  "10",
+  "1997-12-07 11:37:47",
+  "18",
+  "Music",
+  "Guitar",
+  "10",
+  "simone45@example.com",
+  "2c62fe59d4c930601f11755c8166377893eda5ba",
+  "rodrigo.wisoky",
+  "26634",
+  "Recusandae provident quasi impedit ut quam autem sed. Quia accusantium aliquid numquam quia aperiam et iure. Perferendis voluptas fugit vero et autem aspernatur natus.",
+  "http://lorempixel.com/640/480/";
