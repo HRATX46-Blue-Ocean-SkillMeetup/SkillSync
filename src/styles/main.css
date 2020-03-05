@@ -2,6 +2,8 @@
 
 @import url("https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap");
 
+
+
 /* Universal */
 body {
   background-image: url(/imgs/Background.png);
@@ -15,9 +17,12 @@ body {
   display: flexbox;
   font-family: Roboto;
   font-size: 24px;
+  margin: 0 auto;
+  width: 55vw;
 }
 .logoContainer img {
   height: 90px;
+  margin-left: 25vw;
 }
 .clearBackground {
   background: #E5E5E5;
@@ -62,23 +67,38 @@ button {
 .frontPageContainer {
   max-width: 1000px;
   min-width: 500px;
+  
 }
 .categorySquare img {
+  width:18vw;
+  max-width: 200px;
   margin: 5px;
   border-radius: 4px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
-  
+}
+.categorySquare:hover {
+  opacity: 0.9;
+}
+.frontPageRow1 {
+  margin: 0 auto;
+  width: 100%; 
+}
+.quote {
+  font-family: Apple Chancery;
+  font-size: 40px;
 }
 .homeQuoteContainer {
   font-family: Roboto;
   font-style: italic;
   font-weight: lighter;
+  font-size: 30px;
   background-color: #E0F4FB;
   color: #FF3156;
   padding: 20px;
   margin: 5px;
   border-radius: 4px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+  width: 100%; 
 }
 .featuredMentorContainer {
   /* float: right; */
