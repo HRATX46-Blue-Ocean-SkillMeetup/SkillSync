@@ -15,9 +15,9 @@ import useForm from "./CustomHooks";
 const ReviewPage = props => {
   const [rating, setRating] = useState(0);
 
-  const handleUploadReview = cb => {
+  var handleUploadReview = cb => {
     Axios.post(`/post_review`, {
-      description: inputs.text,
+      description: inputs[""],
       rating: rating,
       //user_id = props.user_id
       user_id: 2,
@@ -27,10 +27,11 @@ const ReviewPage = props => {
       skill_id: 7
     }).then(cb);
   };
+  var { inputs, handleInputChange, handleSubmit } = useForm(handleUploadReview);
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(
-    handleUploadReview
-  );
+  const handleRatingChange = newRating => {
+    setRating(newRating);
+  };
 
   return (
     <div className="reviewContainer">
@@ -48,7 +49,7 @@ const ReviewPage = props => {
         }
         width={"65px"}
         height={"65px"}
-        setRating={setRating}
+        setRating={handleRatingChange}
       />
       <textarea
         className="reviewText"

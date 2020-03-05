@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const mysql = require("mysql");
 require("dotenv").config();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -57,6 +58,28 @@ app.get("/search", (req, res) => {
       res.status(200).send(data);
     }
   );
+});
+
+const addReview = (reviewInfo, callback) => {
+  pool.query(
+    `INSERT INTO review (user_id, reviewer_id, skill_id, description, rating, review_date) VALUES (${reviewInfo.user_id},${reviewInfo.skill_id}, ${reviewInfo.reviewer_id}, "${reviewInfo.description}", ${reviewInfo.rating}, now())`,
+    (err, data) => {
+      if (err) throw err;
+      else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+app.post("/post_review", urlencodedParser, (req, res) => {
+  addReview(req.body, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 app.get("/postings", (req, res) => {
