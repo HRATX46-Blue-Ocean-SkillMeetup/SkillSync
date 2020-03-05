@@ -5,9 +5,6 @@ export default function FrontPage() {
 
   return (
     <div>
-      <div className="searchBarContainer">
-        SEARCHBAR
-      </div>
       <div className="logoContainer">
         <img src="../../imgs/logos/SkillSync.png"/>
       </div>
@@ -19,8 +16,8 @@ export default function FrontPage() {
           <CategorySquare name={"../../imgs/categories/Outdoors.png"} />
         <span className="featuredMentorContainer">
           <div className="userPhotoFeatured">
-          <div class="bottom-left">FEATURED MENTOR</div>
-          <div class="bottom-right">BRADLEY</div>
+          <div className="bottom-left">FEATURED MENTOR</div>
+          <div className="bottom-right">BRADLEY</div>
           </div>
         </span>
         </div>

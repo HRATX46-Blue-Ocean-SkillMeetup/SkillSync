@@ -8,9 +8,9 @@ import LoginPage from "./LoginPage.jsx";
 import NavBar from "./NavBar.jsx";
 
 export default function App() {
-  //submits any input data to the database
+  //submits any input data to the database; 
   const submit = () => {
-    // alert(`${inputs.worldName} has been saved`)
+    //inputs.propname
     var info = inputs;
     axios.post('http://localhost:4321/submit', info)
     .then((res) => {
@@ -23,12 +23,15 @@ export default function App() {
   }
 
   //initializes the custom form hook
-  const {inputs, handleInputChange, handleSubmit} = useForm(submit);
+  const {inputs, handleInputChange, handleSubmit, handleNavClick} = useForm(submit);
 
-  //ROUTES
-
+  //CAST OF COMPONENTS
     //Navigation Bar -- takes in boolean; whether there's a new message; contains search bar
-      // <NavBar dot={true} />
+      /*<NavBar 
+          dot={true}
+          inputs={inputs}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}/>*/
 
     //Front Page
       // <FrontPage />
@@ -65,7 +68,9 @@ export default function App() {
           dot={true}
           inputs={inputs}
           handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}/>
+          handleSubmit={handleSubmit}
+          handleNavClick={handleNavClick}/>
+        <FrontPage />
       </div>
     );
   

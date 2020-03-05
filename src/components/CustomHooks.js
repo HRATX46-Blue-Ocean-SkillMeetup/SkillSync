@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+
 const useForm = (callback) => {
   //initializes a state variable and its setter function
   const [inputs, setInputs] = useState({});
@@ -20,10 +21,17 @@ const useForm = (callback) => {
     setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
   }
 
+  //handles the navBar click
+  const handleNavClick = (event) => {
+    setInputs(inputs => ({...inputs, "showNavDrawer": !inputs["showNavDrawer"]}));
+  }
+
+
   //return the handleSubmit, handleInputChange, and the inputs
   return {
     handleSubmit,
     handleInputChange,
+    handleNavClick,
     inputs
   }
 }
