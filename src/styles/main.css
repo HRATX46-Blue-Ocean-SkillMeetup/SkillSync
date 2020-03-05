@@ -122,6 +122,7 @@ button {
   font-size: 28px;
   margin-left: -15px;
   color: #FF8C5B;
+  z-index: 2;
 }
 button, .searchButton{
   display: flexbox;
@@ -135,11 +136,12 @@ button, .searchButton{
   box-shadow: none;
 }
 .searchBarContainer {
-  display: flexbox;
+  display: inline-flex;
+  width: 75vw;
   padding: 8px;
-  padding-bottom: 2px;
-  padding-top: 2px;
+  padding-bottom: 4px;
   background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .navDrawer {
   float: left;
@@ -168,11 +170,13 @@ hr {
   top: 21.18%;
   bottom: 2.65%;
 }
-.navDrawerBottom {
-  /* position: absolute; */
-  /* left: 40.34%; */
-  /* right: 40.34%; */
-  /* top: 97.35%; */
-  bottom: 2.65%;
-  border-bottom: 1px solid #98C460;
+.searchBarContainer .inputText {
+  width: 60vw;
+  height: 41px;
+  background: #E5E5E5;
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: none;
+  margin-left: 8px;
+  margin-right: 8px;
 }
