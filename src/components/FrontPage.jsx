@@ -15,17 +15,17 @@ export default function FrontPage() {
           <br /><CategorySquare name={"../../imgs/categories/Sports.png"} />
           <CategorySquare name={"../../imgs/categories/Outdoors.png"} />
         <span className="featuredMentorContainer">
-          {/* <div className="userPhotoFeatured">
+          <div className="userPhotoFeatured">
           <div className="bottom-left">FEATURED MENTOR</div>
           <div className="bottom-right">BRADLEY</div>
-          </div> */}
+          </div>
         </span>
         </div>
         <div className="homeQuoteContainer">
           <span className="quote">"</span>
             I finally completed my New Year’s resolution to learn to learn Spanish thanks to SkillSync!
           <span className="quote">"</span>
-            -Samantha
+            <br />-Samantha
         </div>
         <div className="categoryIconList">
         <CategorySquare large={true} name={"../../imgs/categories/Crafts.png"} />
