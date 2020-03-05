@@ -1,22 +1,61 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function UserProfile() {
+let promises = [
+  axios.get(`http://localhost:3000/getUserProfile`, {
+      params: {
+        ID: 3,
+      },
+    }),
+  axios.get(`http://localhost:3000/getAverageReviews`, {
+      params: {
+        ID: 3,
+      },
+    }),
+  axios.get('http://localhost:3000/getMentorSkills', {
+    params: {
+      ID: 3,
+    },
+  }),
+  axios.get('http://localhost:3000/getMenteeSkills', {
+    params: {
+      ID: 3,
+    },
+  })
+]
+
+export default function UserProfile({ userId }) {
+
+  const [userInfo, setUserInfo] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [mentorSkills, setMentorSkills] = useState(['kill']);
+  const [menteeSkills, setMenteeSkills] = useState(['people']);
+
+  useEffect(() => {
+    axios.all(promises)
+    .then(responseArray => {
+      setUserInfo(responseArray[0].data[0]);
+      setRating(5.0);
+      setMentorSkills(responseArray[2].data);
+      setMenteeSkills(responseArray[3].data);
+    })
+    .catch((err) => {
+      console.error('request failed');
+    })}, []);
   
   return (
     <div className="profileContainer">
       <div className="profileUserInfo">
         <div className="profileRow1">
           <span className="userPhotoProfile">
-            <img src="imgs/userPhotos/hannah.jpeg" width="140"/>
-          <br />
-            <span className="Rating">
-              STAR RATING COMPONENT
-            </span>
+            <img src={userInfo.user_photo} width="140"/>
+            <br />
+            <span className="Rating">{rating} &#9733;</span> <br />
           </span>
           <span className="userBio">
-            <span className="userFullName">USER FULL NAME</span>
-            <br /> LOCATION COMPONENT
-            <br /> BIO
+            <span className="userFullName">{userInfo.username}</span> <br />
+            ZIP Code: {userInfo.location} <br />
+            Bio: {userInfo.bio} <br />
           </span>
         </div>
       </div>
@@ -29,7 +68,7 @@ export default function UserProfile() {
           SKILLS I TEACH
         </div>
         <div className="skills">
-          SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT 
+          {mentorSkills.map(skill => <div key={skill.skill}>{skill.skill}</div>)}
         </div>
       </div>
       <div className="skillsLearnContainer, clearBackground">
@@ -37,7 +76,7 @@ export default function UserProfile() {
           I WANT TO LEARN
         </div>
         <div className="skills">
-          SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT SKILL COMPONENT 
+          {menteeSkills.map(skills => <div key={skills.skill}>{skills.skill}</div>)}
         </div>
       </div>
       <div className="reviewsContainer">
@@ -45,10 +84,10 @@ export default function UserProfile() {
           REVIEWS
         </div>
         <div className="reviewsContainer">
-          REVIEWS LIST COMPONENT
+          YOU CAN'T ADD A REVIEW. YET.
         </div>
-        <button>REVIEW</button>
+        <button>REVIEW LATER</button>
       </div>
     </div>
   );
-}
+};
