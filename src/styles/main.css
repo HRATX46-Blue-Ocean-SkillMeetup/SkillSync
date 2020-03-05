@@ -218,3 +218,36 @@ hr {
   margin-left: 8px;
   margin-right: 8px;
 }
+
+/* USER PROFILE */
+.profileContainer {
+  max-width: 80vw;
+  margin: 20px;
+}
+.profileUserInfo {
+  width: 80vw;
+  margin: 20px;
+}
+.profileRow1 {
+  display: inline-flex;
+  width: 80vw;
+  margin: 20px;
+  padding: 20px;
+}
+.skillsTeachContainer {
+  display: flex;
+  width: 80vw;
+}
+.skillsLearnContainer {
+  display: flex;
+  width: 80vw;
+}
+.profileSectionTitle {
+  background-color: white;
+
+}
+.skills {
+  width: 80vw;
+  margin: 20px;
+}
+
