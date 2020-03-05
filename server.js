@@ -84,4 +84,30 @@ app.get("/postings", (req, res) => {
   );
 });
 
+app.route("/postingData/:postingId").get((req, res) => {
+  let postingId = req.params.postingId;
+  console.log(postingId);
+  pool.query(
+    `select * from posting
+    join skill on posting.skill_id = skill.skill_id
+    join user on posting.user_id = user.user_id
+    where posting_id = ${postingId};`,
+    function(error, results) {
+      console.log("results are: ");
+      console.log(results);
+      res.status(200).send(results[0]);
+    }
+  );
+});
+
+app.route("/user/rating/:userId").get((req, res) => {
+  let userId = req.params.userId;
+  pool.query(
+    `select AVG(rating) as rating from review where user_id = ${userId};`,
+    function(error, results) {
+      res.status(200).send(results);
+    }
+  );
+});
+
 app.listen(port, () => console.log("port " + port + " is on"));

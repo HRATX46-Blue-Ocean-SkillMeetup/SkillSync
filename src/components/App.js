@@ -1,75 +1,109 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import useForm from './CustomHooks';
+import useForm from "./CustomHooks";
 
 import FrontPage from "./FrontPage.jsx";
 import UserProfile from "./UserProfile.jsx";
 import LoginPage from "./LoginPage.jsx";
 import NavBar from "./NavBar.jsx";
+import NewPostForm from "./NewPostForm";
+import PostingDetailsContainer from "./PostingDetailsContainer";
 
 export default function App() {
+  const [postingId, setPostingId] = useState(4);
+  const [photo, setPhoto] = useState("http://lorempixel.com/640/480/");
+  const [activity, setActivity] = useState("JavaScript");
+  const [mentor, setMentor] = useState("frodriguez");
+  const [postingDescription, setPostingDescription] = useState(
+    "Fugit excepturi et corporis autem possimus. Aut qui minima aliquam dicta eos. Est consequatur aut adipisci iure qui."
+  );
+  const [location, setLocation] = useState("53936");
+  const [rating, setRating] = useState(0);
+  const [skills, setSkills] = useState(["Polish", "Japanase", "cooking"]);
+  const [userId, setUserId] = useState();
+
   //submits any input data to the database
   const submit = () => {
     // alert(`${inputs.worldName} has been saved`)
     var info = inputs;
-    axios.post('http://localhost:4321/submit', info)
-    .then((res) => {
-      // console.log(res);
-      done();
-    })
-    .catch((err) => {
-      console.error('--> jeepers: ', err);
-    })
-  }
+    axios
+      .post("http://localhost:4321/submit", info)
+      .then(res => {
+        // console.log(res);
+        done();
+      })
+      .catch(err => {
+        console.error("--> jeepers: ", err);
+      });
+  };
+
+  //QUERY FOR INDIVIDUAL POSTING
+  // axios.get(`/postingData/${postingId}`).then(function(response) {
+  //   setPhoto(response.data.user_photo);
+  //   setActivity(response.data.skill);
+  //   setMentor(response.data.username);
+  //   setPostingDescription(response.data.description);
+  //   setLocation(response.data.location);
+  //   setUserId(response.data.user_id);
+
+  //   axios.get(`/user/rating/${userId}`).then(function(response) {
+  //     setRating(response.data[0].rating);
+  //   });
+  // });
 
   //initializes the custom form hook
-  const {inputs, handleInputChange, handleSubmit} = useForm(submit);
+  const { inputs, handleInputChange, handleSubmit } = useForm(submit);
 
   //ROUTES
 
-    //Navigation Bar -- takes in boolean; whether there's a new message; contains search bar
-      // <NavBar dot={true} />
+  //Navigation Bar -- takes in boolean; whether there's a new message; contains search bar
+  // <NavBar dot={true} />
 
-    //Front Page
-      // <FrontPage />
-  
-    //Messages List
-  
-    //Single Chat
-  
-    //Log In / Sign up, takes in custom form hooks
-      /*<LoginPage 
+  //Front Page
+  // <FrontPage />
+
+  //Messages List
+
+  //Single Chat
+
+  //Log In / Sign up, takes in custom form hooks
+  /*<LoginPage 
         inputs={inputs}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}/>*/
-  
-    //Create Account
-  
-    //User Profile
-      // <UserProfile />
-  
-    //My Bookings
-  
-    //New Post
-  
-    //Search Results
-  
-    //Individual Posting
-  
-    /*Leave a Review*/
 
+  //Create Account
+
+  //User Profile
+  // <UserProfile />
+
+  //My Bookings
+
+  //New Post
+  // <NewPostForm skills={skills} />
+
+  //Search Results
+
+  //Individual Posting
+
+  // <PostingDetailsContainer
+  //     photo={photo}
+  //     activity={activity}
+  //     mentor={mentor}
+  //     location={location}
+  //     rating={rating}
+  //   />
+
+  /*Leave a Review*/
 
   return (
-      <div>
-        <NavBar 
-          dot={true}
-          inputs={inputs}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}/>
-      </div>
-    );
-  
+    <div>
+      <NavBar
+        dot={true}
+        inputs={inputs}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+      />
+    </div>
+  );
 }
-
-
-
