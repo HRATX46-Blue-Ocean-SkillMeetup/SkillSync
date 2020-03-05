@@ -1,50 +1,22 @@
-const webpack = require("webpack");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const dotenv = require("dotenv");
+var path = require("path");
+var SRC_DIR = path.join(__dirname, "src");
+var DIST_DIR = path.join(__dirname, "dist");
 
-module.exports = () => {
-  return {
-    entry: "./src/index.js",
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: ["babel-loader"]
-        },
-        {
-          test: /\.html$/,
-          use: [
-            {
-              loader: "html-loader",
-              options: { minimize: true }
-            }
-          ]
-        },
-        {
-          test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"]
+module.exports = {
+  entry: `${SRC_DIR}/index.js`,
+  output: {
+    filename: "bundle.js",
+    path: DIST_DIR
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"]
         }
-      ]
-    },
-    resolve: {
-      extensions: ["*", ".js", ".jsx"]
-    },
-    output: {
-      path: __dirname + "/dist",
-      publicPath: "/",
-      filename: "bundle.js"
-    },
-    plugins: [
-      new HtmlWebPackPlugin({
-        template: "./src/index.html",
-        filename: "./index.html"
-      }),
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css"
-      })
+      }
     ]
-  };
+  }
 };
