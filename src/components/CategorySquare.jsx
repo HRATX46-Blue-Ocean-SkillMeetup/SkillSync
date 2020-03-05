@@ -4,7 +4,7 @@ export default function CategorySquare({name, large}) {
 if (large) {
   return(
     <span className="categorySquare">
-      <img src={name} width="182px"/>
+      <img src={name} width="190px"/>
     </span>
   )
 } else {

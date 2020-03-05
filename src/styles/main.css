@@ -59,25 +59,42 @@ button {
 
 
 /* Front Page */
+.frontPageContainer {
+  max-width: 1000px;
+  min-width: 500px;
+}
 .categorySquare img {
+  margin: 5px;
+  border-radius: 4px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+  
 }
 .homeQuoteContainer {
-  background-color: #ffffff;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: lighter;
+  background-color: #E0F4FB;
+  color: #FF3156;
   padding: 20px;
-  margin: 15px;
+  margin: 5px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
 }
 .featuredMentorContainer {
   /* float: right; */
+  display: inline-flex;
   position: absolute;
+  margin: 5px;
   width: 238px;
-  height: 282px;
+  height: 292px;
   /* left: 163px; */
-  /* top: 85px; */
+  top: 165px;
+  border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .userPhotoFeatured {
   /* position: absolute; */
+  display: inline-flex;
   width: 238px;
   height: 280.94px;
   left: calc(50% - 238px/2 + 75px);
@@ -88,6 +105,7 @@ button {
 
 /* User Profile */
 .profileRow1 {
+  display: inline-flex;
 
 }
 .userPhotoProfile {
@@ -136,8 +154,10 @@ button, .searchButton{
   box-shadow: none;
 }
 .searchBarContainer {
+  /* min-width: 500px; */
   display: inline-flex;
   width: 75vw;
+  max-width: 1000px;
   padding: 8px;
   padding-bottom: 4px;
   background: #ffffff;
@@ -172,6 +192,7 @@ hr {
 }
 .searchBarContainer .inputText {
   width: 60vw;
+  max-width: 900px;
   height: 41px;
   background: #E5E5E5;
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.1);

@@ -8,17 +8,17 @@ export default function FrontPage() {
       <div className="logoContainer">
         <img src="../../imgs/logos/SkillSync.png"/>
       </div>
-      <div className="FrontPageContainer">
+      <div className="frontPageContainer">
         <div className="frontPageRow1">
           <CategorySquare name={"../../imgs/categories/Music.png"} />
           <CategorySquare name={"../../imgs/categories/Language.png"} />
           <br /><CategorySquare name={"../../imgs/categories/Sports.png"} />
           <CategorySquare name={"../../imgs/categories/Outdoors.png"} />
         <span className="featuredMentorContainer">
-          <div className="userPhotoFeatured">
+          {/* <div className="userPhotoFeatured">
           <div className="bottom-left">FEATURED MENTOR</div>
           <div className="bottom-right">BRADLEY</div>
-          </div>
+          </div> */}
         </span>
         </div>
         <div className="homeQuoteContainer">
