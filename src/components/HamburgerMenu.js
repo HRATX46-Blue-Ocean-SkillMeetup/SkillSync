@@ -2,11 +2,11 @@ import React from 'react'
 
 const HamburgerMenu = () => {
   return (
-    <button>
+    <div>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
-    </button>
+    </div>
   )
 }
 

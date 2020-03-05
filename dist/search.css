@@ -1,6 +1,11 @@
 * {
   box-sizing: border-box;
 }
+ul.search {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 #searchbar {
   display: flex;
@@ -48,12 +53,6 @@ label.sr-only {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
     0 0 8px rgba(102, 175, 233, 0.6);
 }
-
-/* .input-group {
-  position: relative;
-  display: table;
-  border-collapse: separate;
-} */
 
 .input-group .form-control {
   position: relative;
@@ -127,12 +126,11 @@ form {
 }
 
 .brand {
-  width: 35px;
-  height: 35px;
-  background: url(https://images-na.ssl-images-amazon.com/images/I/712C7Vbf9-L._AC_UL1500_.jpg)
-    no-repeat;
-  background-position: center;
-  background-size: 71%;
+  border-left: 20px solid green;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  right: 1%;
+  position: relative;
 }
 
 .hamburger {
@@ -140,6 +138,24 @@ form {
   height: 5px;
   background-color: black;
   margin: 6px 0;
+}
+
+.search-suggestions {
+  text-decoration: none;
+  position: relative;
+  left: 22%;
+  border: 1px solid #c5c5c5;
+  width: 59.7%;
+  margin: 0.5% 0;
+}
+
+.suggestion-item {
+  padding-left: 1%;
+  line-height: 25px;
+}
+
+.suggestion-item:hover {
+  background: lightgray;
 }
 
 @media (max-width: 767px) {
