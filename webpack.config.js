@@ -4,14 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const dotenv = require("dotenv");
 
 module.exports = () => {
-  const env = dotenv.config().parsed;
-
-  // // reduce it to a nice object, the same as before
-  // const envKeys = Object.keys(env).reduce((prev, next) => {
-  //   prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  //   return prev;
-  // }, {});
-
   return {
     entry: "./src/index.js",
     module: {
@@ -52,14 +44,7 @@ module.exports = () => {
       new MiniCssExtractPlugin({
         filename: "[name].css",
         chunkFilename: "[id].css"
-      }),
-      new webpack.HotModuleReplacementPlugin({
-        devServer: {
-          contentBase: "./dist",
-          hot: true
-        }
-      }),
-      // new webpack.DefinePlugin(envKeys)
+      })
     ]
   };
 };
