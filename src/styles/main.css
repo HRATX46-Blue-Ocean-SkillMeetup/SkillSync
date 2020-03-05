@@ -68,6 +68,7 @@ button {
   margin: 15px;
 }
 .featuredMentorContainer {
+  /* float: right; */
   position: absolute;
   width: 238px;
   height: 282px;
@@ -79,7 +80,7 @@ button {
   /* position: absolute; */
   width: 238px;
   height: 280.94px;
-  /* left: calc(50% - 238px/2 + 75px); */
+  left: calc(50% - 238px/2 + 75px);
   bottom: 303.06px;
   background: url(/imgs/userPhotos/bradley.jpg);
   border-radius: 4px;
@@ -120,7 +121,6 @@ button {
   vertical-align: 1ex;
   font-size: 28px;
   margin-left: -15px;
-  margin-top: -15px;
   color: #FF8C5B;
 }
 button, .searchButton{
@@ -142,6 +142,7 @@ button, .searchButton{
   background: #ffffff;
 }
 .navDrawer {
+  float: left;
   font-size: 24px;
   font-weight: lighter;
   color: #98C460;
@@ -149,6 +150,9 @@ button, .searchButton{
   width: 400px;
   height: 320px;
   padding: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 5;
+  position: absolute;
 }
 .navLink:hover {
   color: #38755D;
