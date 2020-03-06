@@ -78,6 +78,8 @@ app.get("/postings", (req, res) => {
     s.skill,
     u.username,
     u.location,
+    u.city,
+    u.state,
     u.user_photo,
     p.role,
     p.creation_date
