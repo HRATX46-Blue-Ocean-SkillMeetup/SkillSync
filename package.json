@@ -7,8 +7,8 @@
     "web-start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "dev": "webpack -d --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server-start": "nodemon server.js",
-    "start": "node server.js"
+    "server-start": "nodemon server/server.js",
+    "start": "node server/server.js"
   },
   "author": "Justin Gilley",
   "engines": {
@@ -39,9 +39,13 @@
     "cookie-session": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "http": "0.0.0",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "react-router-dom": "^5.1.2",
+    "socket.io": "^2.3.0",
+    "uuid": "^7.0.2"
   }
 }
