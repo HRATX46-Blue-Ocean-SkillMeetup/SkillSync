@@ -47,3 +47,4 @@ export default function Skill({ getSkills }) {
     </div>
   );
 }
+//
