@@ -35,9 +35,8 @@ const EditableStarRating = props => {
                 height={props.height}
                 onClick={() => {
                   updateStars(indx);
-                  if (props.starClickCallback) {
-                    props.setRating(indx + 1);
-                  }
+
+                  props.setRating(indx + 1);
                 }}
               />
             </span>
@@ -53,9 +52,8 @@ const EditableStarRating = props => {
                 key={`${indx}`}
                 onClick={() => {
                   updateStars(indx);
-                  if (props.starClickCallback) {
-                    props.setRating(indx + 1);
-                  }
+
+                  props.setRating(indx + 1);
                 }}
               />
             </span>
