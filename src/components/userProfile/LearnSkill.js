@@ -29,11 +29,13 @@ export default function LearnSkill() {
         console.log(error);
       });
   }, []);
+  console.log(mentorSkill);
+  console.log(menteeSkill);
 
   const testArray = ["one", "two", "three", "four"];
   return (
     <div>
-      <div className="userProfile-learn-skill">
+      <div className="userProfile-overLearn">
         {menteeSkill.map(x => (
           <li className="userProfile-learn-skill">{x}</li>
         ))}

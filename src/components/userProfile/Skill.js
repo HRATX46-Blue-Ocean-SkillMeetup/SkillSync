@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Skill({ getSkills }) {
-  const [skill, setSkill] = useState("a samplE");
   const [menteeSkill, setMenteeSkill] = useState([]);
   const [mentorSkill, setMentorSkill] = useState([]);
 
@@ -40,8 +39,8 @@ export default function Skill({ getSkills }) {
 
   return (
     <div>
-      <div className="userProfile-skill">
-        {testArray.map(x => (
+      <div className="userProfile-overSkill">
+        {mentorSkill.map(x => (
           <li className="userProfile-skill">{x}</li>
         ))}
       </div>
