@@ -19,7 +19,7 @@ export default function NavBar({
       {/* SEARCH BAR */}
       <Search />
       {/* NAVIGATION DRAWER */}
-      <div className="navDrawer">
+      {/* <div className="navDrawer">
         <span className="navLink">
           MESSAGES{dot ? <NotificationDot /> : <></>}
         </span>
@@ -31,8 +31,8 @@ export default function NavBar({
         <span className="navLink">NEW POSTING</span>
         <hr color="#98C460" />
 
-        <div className="navDrawerBottom">{/* <hr color="#98C460"/> */}</div>
-      </div>
+        <div className="navDrawerBottom"><hr color="#98C460"/></div>
+      </div> */}
     </div>
   );
 }

@@ -17,6 +17,7 @@ body {
   display: flexbox;
   font-family: Roboto;
   font-size: 24px;
+  margin: 0;
 }
 .logoContainer img {
   height: 90px;
