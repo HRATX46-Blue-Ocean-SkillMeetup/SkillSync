@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const mysql = require("mysql");
 require("dotenv").config();
+const { userProfileRoutes } = require('./routes/userProfile.js');
+const { addReviewsRoute } = require('./routes/addReview.js');
 
 var pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -26,6 +28,9 @@ app.use(
     keys: ["nvalsdjflkasdjfiow"]
   })
 );
+
+userProfileRoutes(app);
+addReviewsRoute(app);
 
 app.route("/test").get((req, res) => {
   pool.query(`SELECT * FROM test`, function(error, results) {
