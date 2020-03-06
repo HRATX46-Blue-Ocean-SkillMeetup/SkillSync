@@ -4,23 +4,25 @@ function NewPostForm(props) {
   return (
     <div className="newPostForm">
       <div className="inputDropdown">
-        <label className="newPostText">
-          What do you want to teach?
-          <select>
-            <option value="">choose from your skills</option>
-            {props.skills.map(skill => {
-              return <option value={skill}>{skill}</option>;
-            })}
-          </select>
-        </label>
+        <p className="newPostText">What do you want to teach?</p>
+        <select onChange={props.handleSkillChange}>
+          <option value="">Choose from your skills</option>
+          {props.skills.map((skill, index) => {
+            return (
+              <option key={index} value={skill.id}>
+                {skill.skill}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <div className="inputText">
-        <label className="newPostText">
-          Enter a brief description
-          <textarea>how long you have practiced this skill, etc</textarea>
-        </label>
+        <p className="newPostText">Enter a brief description</p>
+        <textarea onChange={props.handleChange}>
+          {props.skillDescription}
+        </textarea>
       </div>
-      <button>POST</button>
+      <button onClick={props.handleClickPost}>POST</button>
     </div>
   );
 }

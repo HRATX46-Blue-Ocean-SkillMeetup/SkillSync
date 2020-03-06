@@ -17,10 +17,11 @@ export default function App() {
   const [postingDescription, setPostingDescription] = useState(
     "Fugit excepturi et corporis autem possimus. Aut qui minima aliquam dicta eos. Est consequatur aut adipisci iure qui."
   );
+  const [selectedSkill, setSelectedSkill] = useState({});
   const [location, setLocation] = useState("53936");
   const [rating, setRating] = useState(0);
-  const [skills, setSkills] = useState(["Polish", "Japanase", "cooking"]);
-  const [userId, setUserId] = useState();
+  const [skills, setSkills] = useState([]);
+  const [userId, setUserId] = useState(1);
 
   //submits any input data to the database
   const submit = () => {
@@ -37,6 +38,27 @@ export default function App() {
       });
   };
 
+  const handleChange = event => {
+    setPostingDescription(event.target.value);
+  };
+
+  const handleSkillChange = event => {
+    setSelectedSkill(event.target.value);
+  };
+
+  const handleClickPost = event => {
+    console.log(selectedSkill);
+    console.log(userId);
+    console.log(postingDescription);
+    axios
+      .post("/addPosting", {
+        skillId: selectedSkill,
+        description: postingDescription,
+        userId: userId
+      })
+      .then();
+  };
+
   //QUERY FOR INDIVIDUAL POSTING
   // axios.get(`/postingData/${postingId}`).then(function(response) {
   //   setPhoto(response.data.user_photo);
@@ -49,6 +71,18 @@ export default function App() {
   //   axios.get(`/user/rating/${userId}`).then(function(response) {
   //     setRating(response.data[0].rating);
   //   });
+  // });
+
+  //QUERY FRO NEW POST FORM
+  // axios.get(`/getSkills/${userId}`).then(function(response) {
+  //   const skillsArray = [];
+  //   response.data.forEach(obj => {
+  //     skillsArray.push({
+  //       skill: obj.skill,
+  //       id: obj.skill_id
+  //     });
+  //   });
+  //   setSkills(skillsArray);
   // });
 
   //initializes the custom form hook
@@ -80,7 +114,14 @@ export default function App() {
   //My Bookings
 
   //New Post
-  // <NewPostForm skills={skills} />
+  // <NewPostForm
+  //   skills={skills}
+  //   skillDescription={postingDescription}
+  //   handleChange={handleChange}
+  //   selectedSkill={selectedSkill}
+  //   handleSkillChange={handleSkillChange}
+  //   handleClickPost={handleClickPost}
+  // />
 
   //Search Results
 

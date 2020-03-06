@@ -110,4 +110,34 @@ app.route("/user/rating/:userId").get((req, res) => {
   );
 });
 
+app.route("/getSkills/:userId").get((req, res) => {
+  let userId = req.params.userId;
+  pool.query(
+    `select skill, skill.skill_id from user_skill
+  left join skill on user_skill.skill_id = skill.skill_id
+  where user_id = 1 AND role = 'mentor';`,
+    function(error, results) {
+      //console.log(results);
+      res.status(200).send(results);
+    }
+  );
+});
+
+app.route("/addPosting").post((req, res) => {
+  let skillId = req.body.skillId;
+  let description = req.body.description;
+  let userId = req.body.userId;
+
+  console.log(skillId);
+  console.log(description);
+  console.log(userId);
+  let query = `INSERT INTO posting (role, skill_id, user_id, description) VALUES ('mentor', '${skillId}', '${userId}', '${description}');`;
+  console.log(query);
+  pool.query(query, function(error, results) {
+    console.log("ERROR:");
+    console.log(error);
+    res.status(200).send(results);
+  });
+});
+
 app.listen(port, () => console.log("port " + port + " is on"));
