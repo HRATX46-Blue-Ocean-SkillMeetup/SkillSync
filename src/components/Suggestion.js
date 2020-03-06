@@ -1,6 +1,10 @@
 import React from "react";
 
-const Suggestion = ({ searchSuggestions, showSuggestions, handleClick }) => {
+const Suggestion = ({
+  searchSuggestions,
+  showSuggestions,
+  handleSuggestionClick
+}) => {
   return (
     <div
       className="search-suggestions"
@@ -13,7 +17,7 @@ const Suggestion = ({ searchSuggestions, showSuggestions, handleClick }) => {
               className="suggestion-item"
               key={skill_id}
               value={skill_id}
-              onClick={handleClick}
+              onClick={handleSuggestionClick}
             >
               {skill}
             </li>

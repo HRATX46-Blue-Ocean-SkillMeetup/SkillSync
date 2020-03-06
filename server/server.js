@@ -1,24 +1,38 @@
-const express = require("express");
-const app = express();
+const {
+  app,
+  server,
+  express,
+  socketInit,
+  connectedUsers
+} = require("./socket");
 const path = require("path");
 const port = process.env.PORT || 3000;
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
 const mysql = require("mysql");
 require("dotenv").config();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-var pool = mysql.createPool({
+const { userProfileRoutes } = require("./routes/userProfile.js");
+const { addReviewsRoute } = require("./routes/addReview.js");
+
+const { chatHistory } = require("./routes/chatHistory");
+const { signInLogInRoutes } = require("./routes/signInLogIn");
+const { getUserIds, insertMessage, setVisited } = require("./messageHelpers");
+const { postingRoutes } = require("./routes/posting.js");
+
+pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_DB
 });
 
+socketInit(insertMessage);
+
 app.set("trust proxy", 1);
 
-app.use(express.static(path.join(__dirname, "./dist")));
+app.use(express.static(path.join(__dirname, "../dist")));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -28,17 +42,15 @@ app.use(
   })
 );
 
+userProfileRoutes(app);
+// addReviewsRoute(app);
+signInLogInRoutes(app);
+chatHistory(app, getUserIds, setVisited);
+postingRoutes(app);
+
 app.route("/test").get((req, res) => {
   pool.query(`SELECT * FROM test`, function(error, results) {
     if (error) {
-      console.log(
-        "bye",
-        process.env.DB_HOST,
-        process.env.DB_USER,
-        process.env.DB_PASS,
-        process.env.DB_DB
-      );
-
       res.status(500).send();
     } else {
       console.log("hi");
@@ -89,6 +101,8 @@ app.get("/postings", (req, res) => {
     s.skill,
     u.username,
     u.location,
+    u.city,
+    u.state,
     u.user_photo,
     p.role,
     p.creation_date
@@ -107,4 +121,4 @@ app.get("/postings", (req, res) => {
   );
 });
 
-app.listen(port, () => console.log("port " + port + " is on"));
+server.listen(port, () => console.log("port " + port + " is on"));
