@@ -1,0 +1,25 @@
+.message-chatbox {
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  /* overflow: auto; */
+  overflow: auto;
+  vertical-align: bottom;
+}
+
+.message-self {
+  color: red;
+  text-align: right;
+  overflow-anchor: none;
+}
+
+.message-interlocutor {
+  color: blue;
+  text-align: left;
+  overflow-anchor: none;
+}
+
+.message-chatbox :last-child {
+  overflow-anchor: auto;
+  height: 1px;
+}
