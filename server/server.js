@@ -18,6 +18,7 @@ const { addReviewsRoute } = require("./routes/addReview.js");
 const { chatHistory } = require("./routes/chatHistory");
 const { signInLogInRoutes } = require("./routes/signInLogIn");
 const { getUserIds, insertMessage, setVisited } = require("./messageHelpers");
+const { postingRoutes } = require("./routes/posting.js");
 
 pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -44,6 +45,7 @@ userProfileRoutes(app);
 // addReviewsRoute(app);
 signInLogInRoutes(app);
 chatHistory(app, getUserIds, setVisited);
+postingRoutes(app);
 
 app.route("/test").get((req, res) => {
   pool.query(`SELECT * FROM test`, function(error, results) {
