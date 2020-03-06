@@ -23,7 +23,7 @@ export default function App() {
   }
 
   //initializes the custom form hook
-  const {inputs, handleInputChange, handleSubmit} = useForm(submit);
+  const {inputs, handleInputChange, handleSubmit, handleNavClick} = useForm(submit);
 
   //ROUTES
 
@@ -65,7 +65,10 @@ export default function App() {
           dot={true}
           inputs={inputs}
           handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}/>
+          handleSubmit={handleSubmit}
+          handleNavClick={handleNavClick}/>
+
+        <FrontPage />
       </div>
     );
   
