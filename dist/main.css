@@ -186,6 +186,8 @@ hr {
   color: white;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+
   border-radius: 4px;
   padding: 1px;
   font-family: Roboto;
@@ -200,13 +202,15 @@ hr {
 }
 .userProfile-skill {
   display: flex;
+
   flex-direction: row;
   width: 80px;
   height: 40px;
   align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   border-radius: 4px;
-  padding: 1px;
+  padding: 20px;
   margin: 10px;
   background: #ffffff;
   font-family: Roboto;
