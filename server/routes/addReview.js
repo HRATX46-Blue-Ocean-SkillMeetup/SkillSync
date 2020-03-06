@@ -20,7 +20,6 @@ function addReviewsRoute(app) {
       }
     });
   });
-  
 }
 
-module.exports.addReviewRoute = addReviewsRoute;
+module.exports.addReviewsRoute = addReviewsRoute;
