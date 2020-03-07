@@ -11,6 +11,7 @@ const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 require("dotenv").config();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const { userProfileRoutes } = require("./routes/userProfile.js");
 const { addReviewsRoute } = require("./routes/addReview.js");
@@ -69,6 +70,49 @@ app.get("/search", (req, res) => {
     }
   );
 });
+
+const addReview = (reviewInfo, callback) => {
+  pool.query(
+    `INSERT INTO review (user_id, reviewer_id, skill_id, description, rating, review_date) VALUES (${reviewInfo.user_id},${reviewInfo.skill_id}, ${reviewInfo.reviewer_id}, "${reviewInfo.description}", ${reviewInfo.rating}, now())`,
+    (err, data) => {
+      if (err) throw err;
+      else {
+        callback(null, data);
+      }
+    }
+  );
+};
+
+app.post("/post_review", urlencodedParser, (req, res) => {
+  addReview(req.body, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(data);
+    }
+  });
+});
+app.get("/getSkills", (req, res) => {
+  console.log(req.query.ID);
+  pool.query(
+    `SELECT
+  b.role,
+  c.skill
+  FROM user a
+  LEFT JOIN user_skill b
+    on a.user_id = b.user_id
+  LEFT JOIN skill c
+    on b.skill_id = c.skill_id
+  WHERE b.user_id = '${req.query.ID}';`,
+    (err, data) => {
+      if (err) {
+        res.status(404).send("");
+      }
+      res.status(200).send(data);
+    }
+  );
+});
+
 
 app.get("/postings", (req, res) => {
   pool.query(
