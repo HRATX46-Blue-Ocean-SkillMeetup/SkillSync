@@ -93,6 +93,27 @@ app.post("/post_review", urlencodedParser, (req, res) => {
     }
   });
 });
+app.get("/getSkills", (req, res) => {
+  console.log(req.query.ID);
+  pool.query(
+    `SELECT
+  b.role,
+  c.skill
+  FROM user a
+  LEFT JOIN user_skill b
+    on a.user_id = b.user_id
+  LEFT JOIN skill c
+    on b.skill_id = c.skill_id
+  WHERE b.user_id = '${req.query.ID}';`,
+    (err, data) => {
+      if (err) {
+        res.status(404).send("");
+      }
+      res.status(200).send(data);
+    }
+  );
+});
+
 
 app.get("/postings", (req, res) => {
   console.log(req.query.skill_id);

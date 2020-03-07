@@ -8,6 +8,8 @@ import LoginPage from "./Authentication/LoginPage.jsx";
 import NavBar from "./NavBar.jsx";
 import NewPostForm from "./NewPostForm";
 import PostingDetailsContainer from "./PostingDetailsContainer";
+import Skills from "./userProfile/Skills";
+import WantSkills from "./userProfile/WantSkills";
 
 export function App() {
   const [postingId, setPostingId] = useState(4);

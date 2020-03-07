@@ -181,6 +181,7 @@ hr {
 
 .userProfile-skills {
   display: flex;
+
   width: 98%;
   height: 100px;
   background: #237553;
@@ -196,6 +197,11 @@ hr {
   line-height: 100%;
 }
 .userProfile-skill-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.userProfile-overSkill {
   display: flex;
   flex-direction: row;
 }
@@ -219,6 +225,11 @@ hr {
   color: #656565;
 }
 
+.userProfile-overLearn {
+  display: flex;
+  flex-direction: row;
+}
+
 .userProfile-want-to-learn-container {
   display: flex;
   width: 100%;
@@ -237,7 +248,7 @@ hr {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 1px;
+  margin: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
@@ -269,4 +280,4 @@ hr {
   text-align: center;
   color: #656565;
 }
-/* ---------- */
+/* ---------- james*/
