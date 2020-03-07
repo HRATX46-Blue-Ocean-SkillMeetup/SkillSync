@@ -3,9 +3,7 @@ import React from "react";
 function Location(props) {
   return (
     <div>
-      <div className="locationSym">
-        <img src="https://via.placeholder.com/15" alt="" />
-      </div>
+      <i className="fas fa-map-marker-alt locationSym"></i>
       <p>{props.location}</p>
     </div>
   );
