@@ -61,6 +61,11 @@ export function App() {
       .then();
   };
 
+  const handleSelectPost = (e, postingId) => {
+    console.log("handleSelectPost", postingId);
+    setPostingId(postingId);
+  };
+
   //QUERY FOR INDIVIDUAL POSTING
   // axios.get(`/postingData/${postingId}`).then(function(response) {
   //   setPhoto(response.data.user_photo);
@@ -145,6 +150,7 @@ export function App() {
         inputs={inputs}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
+        handleSelectPost={handleSelectPost}
       />
     </div>
   );

@@ -6,7 +6,8 @@ export default function NavBar({
   dot,
   inputs,
   handleInputChange,
-  handleSubmit
+  handleSubmit,
+  handleSelectPost
 }) {
   //will take in a boolean that determines whether notification dot component will be visible
 
@@ -17,7 +18,7 @@ export default function NavBar({
   return (
     <div className="topBar">
       {/* SEARCH BAR */}
-      <Search />
+      <Search handleSelectPost={handleSelectPost}/>
       {/* NAVIGATION DRAWER */}
       {/* <div className="navDrawer">
         <span className="navLink">

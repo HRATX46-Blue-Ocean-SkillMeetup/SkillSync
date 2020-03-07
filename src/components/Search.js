@@ -4,7 +4,7 @@ import axios from "axios";
 import Suggestion from "./Suggestion";
 import PostingList from "./PostingList";
 
-const Search = () => {
+const Search = ({handleSelectPost}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -16,7 +16,6 @@ const Search = () => {
       setSearchSuggestions([]);
       return;
     }
-    console.log(searchTerm);
     axios
       .get("/search", {
         params: {
@@ -24,7 +23,6 @@ const Search = () => {
         }
       })
       .then(({ data }) => {
-        console.log(data);
         if (data.length === 0) {
           setSearchSuggestions([]);
           setShowSuggestions(false);
@@ -43,7 +41,6 @@ const Search = () => {
   };
 
   const handleSuggestionClick = e => {
-    console.log(e.target.value);
     const skill_id = e.target.value;
     axios
       .get("/postings", {
@@ -52,7 +49,23 @@ const Search = () => {
         }
       })
       .then(({ data }) => {
-        console.log("postings", data);
+        const postings = [];
+        data.forEach(skill => postings.push(skill));
+        setPostings(postings);
+        setShowSuggestions(false);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleSearchClick = (e) => {
+    e.preventDefault();
+    axios
+      .get("/search/postings", {
+        params: {
+          searchTerm
+        }
+      })
+      .then(({ data }) => {
         const postings = [];
         data.forEach(skill => postings.push(skill));
         setPostings(postings);
@@ -86,6 +99,7 @@ const Search = () => {
                   aria-label="Search Submit"
                   className="btn btn-default layout-navbar-search-btn"
                   type="submit"
+                  onClick={handleSearchClick}
                 >
                   <i className="fas fa-search"></i>
                 </button>
@@ -100,7 +114,7 @@ const Search = () => {
         showSuggestions={showSuggestions}
         handleSuggestionClick={handleSuggestionClick}
       />
-      <PostingList postings={postings} />
+      <PostingList postings={postings} handleSelectPost={handleSelectPost}/>
     </div>
   );
 };

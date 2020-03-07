@@ -1,9 +1,12 @@
 import React from "react";
 import StarRating from "react-star-ratings";
 
-const Posting = ({ posting }) => {
+const Posting = ({ posting, handleSelectPost }) => {
   return (
-    <div className="post">
+    <div
+      className="post"
+      onClick={e => handleSelectPost(e, posting.posting_id)}
+    >
       <div className="post-image">
         <img src={posting.user_photo} />
       </div>
@@ -14,14 +17,14 @@ const Posting = ({ posting }) => {
             : `${posting.username} likes ${posting.skill}!`}
         </div>
         <div className="post-location">
-          <i class="fas fa-map-marker-alt"></i>
+          <i className="fas fa-map-marker-alt"></i>
           <span className="post-location">{`${posting.city}, ${posting.state}`}</span>
         </div>
         <StarRating
-          rating={3.5}
+          rating={posting.rating === null ? 0 : posting.rating}
           starRatedColor="#FF8C5B"
           name="rating"
-          starDimension='25px'
+          starDimension="25px"
         />
       </div>
     </div>
