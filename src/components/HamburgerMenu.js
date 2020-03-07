@@ -1,8 +1,8 @@
 import React from "react";
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ handleNavDrawerClick }) => {
   return (
-    <div className="hamburger-container">
+    <div className="hamburger-container" onClick={() => handleNavDrawerClick()}>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
