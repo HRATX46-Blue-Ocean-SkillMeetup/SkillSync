@@ -3,13 +3,17 @@ import StarRatings from "react-star-ratings";
 
 function Rating(props) {
   return (
-    <StarRatings
-      rating={props.rating}
-      starRatedColor="blue"
-      //changeRating={}
-      numberOfStars={5}
-      name="rating"
-    />
+    <div className="posting-starRating">
+      <StarRatings
+        rating={props.rating}
+        starRatedColor="#57B561"
+        //changeRating={}
+        numberOfStars={5}
+        starDimension="20px"
+        starSpacing="1px"
+        name="rating"
+      />
+    </div>
   );
 }
 

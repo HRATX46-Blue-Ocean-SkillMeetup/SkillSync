@@ -141,9 +141,10 @@ body {
   font-weight: lighter;
   color: #98c460;
   background: #ffffff;
-  width: 400px;
-  height: 320px;
-  padding: 20px;
+  width: 100%;
+  padding: 0 2%;
+  position: absolute;
+  top: 8%;
 }
 .navLink:hover {
   color: #38755d;
