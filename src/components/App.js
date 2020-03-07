@@ -67,12 +67,12 @@ export function App() {
 
   return (
     <div>
-      {/* <NavBar
+      <NavBar
         dot={true}
         inputs={inputs}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
-      /> */}
+      />
     </div>
   );
 }
