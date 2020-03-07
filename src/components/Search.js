@@ -4,7 +4,7 @@ import axios from "axios";
 import Suggestion from "./Suggestion";
 import PostingList from "./PostingList";
 
-const Search = ({handleSelectPost}) => {
+const Search = ({ handleSelectPost, handleNavDrawerClick }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -57,7 +57,7 @@ const Search = ({handleSelectPost}) => {
       .catch(err => console.log(err));
   };
 
-  const handleSearchClick = (e) => {
+  const handleSearchClick = e => {
     e.preventDefault();
     axios
       .get("/search/postings", {
@@ -77,7 +77,7 @@ const Search = ({handleSelectPost}) => {
   return (
     <div className="search">
       <div id="searchbar">
-        <HamburgerMenu />
+        <HamburgerMenu handleNavDrawerClick={handleNavDrawerClick}/>
         <form role="search" action="/q" acceptCharset="UTF-8" method="GET">
           <div className="search-layout">
             <div className="input-group">
@@ -114,7 +114,7 @@ const Search = ({handleSelectPost}) => {
         showSuggestions={showSuggestions}
         handleSuggestionClick={handleSuggestionClick}
       />
-      <PostingList postings={postings} handleSelectPost={handleSelectPost}/>
+      <PostingList postings={postings} handleSelectPost={handleSelectPost} />
     </div>
   );
 };
