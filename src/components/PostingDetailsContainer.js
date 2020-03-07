@@ -4,9 +4,7 @@ import Location from "./Location.js";
 import Rating from "./Rating.js";
 
 function PostingDetailsContainer(props) {
-  const [photo, setPhoto] = useState(
-    "https://images.unsplash.com/photo-1529736576495-1ed4a29ca7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-  );
+  const [photo, setPhoto] = useState("");
   const [activity, setActivity] = useState("");
   const [mentor, setMentor] = useState("");
   const [postingDescription, setPostingDescription] = useState(
@@ -27,24 +25,26 @@ function PostingDetailsContainer(props) {
   }, []);
 
   return (
-    <div className="posting-postingDetailsContainer">
-      <div className="posting-smallContainer">
-        <div>
-          <img src={photo} alt="" className="posting-userPhotoPosting" />
+    <div>
+      <div className="posting-postingDetailsContainer">
+        <div className="posting-smallContainer">
+          <div className="posting-userPhotoPosting">
+            <img src={photo} alt="" className="posting-image" />
+          </div>
+          <div>
+            <p className="posting-title">
+              <strong>{activity} </strong>lesson with {mentor}
+            </p>
+            <Location location={location} />
+            <Rating rating={rating} />
+          </div>
         </div>
         <div>
-          <p className="postingTitle">
-            {activity} lesson with {mentor}
-          </p>
-          <Location location={location} />
-          <Rating rating={rating} />
+          <p className="posting-postingDescription">{postingDescription}</p>
         </div>
       </div>
-      <div>
-        <p className="postingDescription">
-          I've been playing violin for nearly six decades and teaching for
-          almost three! I'm available most weekdays between 9am and 7pm
-        </p>
+      <div className="posting-buttonContainer">
+        <button className="posting-button">MESSAGE</button>
       </div>
     </div>
   );
