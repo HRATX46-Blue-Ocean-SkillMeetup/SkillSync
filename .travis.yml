@@ -1,9 +1,6 @@
 language: node_js
 node_js:
- - "10.6.0 "
-install:
-  - npm install
+  - "10.6.0 "
 before_script:
-  - npm run build
-script:
-  - npm start
+  - "npm run-script setup"
+  - "npm run-script build"
