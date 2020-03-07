@@ -30,6 +30,13 @@ export function App() {
       });
   };
 
+
+  
+  const handleSelectPost = (e, postingId) => {
+    console.log("handleSelectPost", postingId);
+    setPostingId(postingId);
+  };
+
   //initializes the custom form hook
   const { inputs, handleInputChange, handleSubmit } = useForm(submit);
 
@@ -69,12 +76,13 @@ export function App() {
 
   return (
     <div>
-      {/* <NavBar
+      <NavBar
         dot={true}
         inputs={inputs}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
-      /> */}
+        handleSelectPost={handleSelectPost}
+      />
     </div>
   );
 }
