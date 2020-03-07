@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ handleNavDrawerClick }) => {
   return (
-    <div>
+    <div className="hamburger-container" onClick={() => handleNavDrawerClick()}>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
       <div className="hamburger"></div>
     </div>
-  )
-}
+  );
+};
 
-export default HamburgerMenu
+export default HamburgerMenu;
