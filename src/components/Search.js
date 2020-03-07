@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HamburgerMenu from "./HamburgerMenu";
-import Axios from "axios";
+import axios from "axios";
 import Suggestion from "./Suggestion";
 import PostingList from "./PostingList";
 
@@ -17,17 +17,23 @@ const Search = () => {
       return;
     }
     console.log(searchTerm);
-    Axios.get("/search", {
-      params: {
-        searchTerm
-      }
-    })
+    axios
+      .get("/search", {
+        params: {
+          searchTerm
+        }
+      })
       .then(({ data }) => {
         console.log(data);
+        if (data.length === 0) {
+          setSearchSuggestions([]);
+          setShowSuggestions(false);
+          return;
+        }
         const searchSuggestions = [];
         data.forEach(skill => searchSuggestions.push(skill));
         setSearchSuggestions(searchSuggestions);
-        if (data.length && showSuggestions !== true) setShowSuggestions(true);
+        if (showSuggestions !== true) setShowSuggestions(true);
       })
       .catch(err => console.log(err));
   }, [searchTerm]);
@@ -36,14 +42,15 @@ const Search = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleClick = e => {
+  const handleSuggestionClick = e => {
     console.log(e.target.value);
     const skill_id = e.target.value;
-    Axios.get("/postings", {
-      params: {
-        skill_id
-      }
-    })
+    axios
+      .get("/postings", {
+        params: {
+          skill_id
+        }
+      })
       .then(({ data }) => {
         console.log("postings", data);
         const postings = [];
@@ -91,7 +98,7 @@ const Search = () => {
       <Suggestion
         searchSuggestions={searchSuggestions}
         showSuggestions={showSuggestions}
-        handleClick={handleClick}
+        handleSuggestionClick={handleSuggestionClick}
       />
       <PostingList postings={postings} />
     </div>
