@@ -1,5 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components/App";
+import AppRouter from "./components/AppRouter.jsx";
+import { Router } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import { createBrowserHistory } from "history";
+export const history = createBrowserHistory();
+
+ReactDOM.render(
+  <Router history={history} basename={"http://localhost:3000/"}>
+    <AppRouter />
+  </Router>,
+
+  document.getElementById("root")
+);
