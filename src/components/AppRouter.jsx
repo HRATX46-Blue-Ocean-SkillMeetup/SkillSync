@@ -12,6 +12,8 @@ import useForm from "./CustomHooks";
 
 import FrontPage from "./FrontPage.jsx";
 import UserProfile from "./UserProfile.jsx";
+
+import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 import LoginPage from "./Authentication/LoginPage.jsx";
 import SignIn from "./Authentication/SignIn.jsx";
 import ChatBox from "./Authentication/ChatBox.jsx";
@@ -23,11 +25,16 @@ import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
 
 const socketUrl = "http://localhost:3000";
 export const socket = io(socketUrl);
-
 export const UserState = createContext({ username: "", user_id: 21 });
 
 export const UserStateReducer = (state, action) => {
@@ -39,44 +46,54 @@ export const UserStateReducer = (state, action) => {
   }
 };
 
-export function AppRouter() {
+const AppRouter = () => {
   const [userInfo, dispatchContext] = useReducer(
     UserStateReducer,
     useContext(UserState)
   );
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/login/">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup/">SignUp</Link>
-            </li>
-            <li>
-              <Link to="/chatbox/">ChatBox</Link>
-            </li>
-          </ul>
-        </nav>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/login/">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup/">SignUp</Link>
+          </li>
+          <li>
+            <Link to="/userprofile/">UserProfile</Link>
+          </li>
+          <li>
+            <Link to="/home/">Home</Link>
+          </li>
+        </ul>
+      </nav>
 
-        <Switch>
-          <UserState.Provider value={{ userInfo, dispatchContext }}>
-            <Route path="/login/">
-              <LoginPage />
-            </Route>
-            <Route path="/signup/">
-              <SignIn />
-            </Route>
-            <Route path="/chatbox/">
-              <ChatBox />
-            </Route>
-          </UserState.Provider>
-        </Switch>
-      </div>
-    </Router>
+      <Switch>
+        <UserState.Provider value={{ userInfo, dispatchContext }}>
+          <Route path="/login/">
+            <LoginPage />
+          </Route>
+          <Route path="/signup/">
+            <SignIn />
+          </Route>
+          <Route path="/userprofile/">
+            <UserProfile />
+          </Route>
+          <Route path="/home/">
+            <FrontPage />
+          </Route>
+        </UserState.Provider>
+      </Switch>
+    </div>
   );
+};
+
+export default withRouter(AppRouter);
+
+{
+  /* <PrivateRoute path="/chatbox/" component={ChatBox} /> */
 }
 
 // const submitLogOut = () => {

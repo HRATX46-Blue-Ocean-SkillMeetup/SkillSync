@@ -38,15 +38,15 @@ const socketInit = insertMessage => {
         if (connectedUsers[target]) {
           const { chatroom, socketId } = connectedUsers[target];
           if (chatroom !== username) {
-            // insertMessage(message, false, username, target);
+            insertMessage(message, false, username, target);
             console.log("1: wrong chatroom");
           } else {
             io.to(`${socketId}`).emit("pm", message);
-            // insertMessage(message, true, username, target);
+            insertMessage(message, true, username, target);
             console.log("2: connected to the same chatroom");
           }
         } else {
-          // insertMessage(message, false, username, target);
+          insertMessage(message, false, username, target);
           console.log("3: target user is not connected");
         }
       });

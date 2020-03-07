@@ -2,13 +2,12 @@ import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
-
+import { history } from "../../index.js";
 import { UserState, socket } from "../AppRouter.jsx";
 
-export default function LoginPage(props) {
+export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [temp, setTemp] = useState("");
 
   const { userInfo, dispatchContext } = useContext(UserState);
 
@@ -31,6 +30,7 @@ export default function LoginPage(props) {
           password
         })
         .then(data => {
+          history.push("/home/");
           dispatchContext({
             type: "set-user",
             username: data.data.username,
@@ -39,6 +39,9 @@ export default function LoginPage(props) {
           socket.emit("login", data.data.username, null);
           console.log("logged in");
         })
+        // .then(data => {
+        // })
+
         .catch(error => {
           console.log(error);
         });
@@ -46,7 +49,6 @@ export default function LoginPage(props) {
       console.log("nope");
     }
   };
-
   return (
     <div>
       <InputField
@@ -64,9 +66,7 @@ export default function LoginPage(props) {
       />
       <button onClick={submitLogIn}>Log In </button>
       <br />
-      <br />
-      <br />
-      <button>Sign Out </button>
+      <button>Sign Up </button>
     </div>
   );
 }

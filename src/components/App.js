@@ -13,9 +13,15 @@ import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  // BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
 
-export function App() {
+const App = () => {
   const [postingId, setPostingId] = useState(1);
   const [userId, setUserId] = useState(1);
 
@@ -87,4 +93,6 @@ export function App() {
       />
     </div>
   );
-}
+};
+
+export default withRouter(App);

@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
 import useUnload from "./useUnload.jsx";
 
 import { UserState, socket } from "../AppRouter.jsx";
-
-// import { useParams } from "react-router-dom";
-// const { target } = useParams();
 
 // get username from Provider.Context
 // get id from Provider.Context
@@ -30,6 +28,8 @@ function reducer(state, action) {
   }
 }
 
+const baseURL = "http://localhost:3000/";
+
 export default function ChatBox(props) {
   const { userInfo, dispatchContext } = useContext(UserState);
   const { username, user_id } = userInfo;
@@ -39,7 +39,16 @@ export default function ChatBox(props) {
   const [message, setMessage] = useState("");
 
   // need to fix
-  const [target, setTarget] = useState("d");
+  const setTargetInit = username => {
+    if (username === "g") {
+      return "j";
+    } else {
+      return "g";
+    }
+  };
+  const { target } = useParams();
+
+  console.log(target);
 
   useEffect(() => {
     console.log(chats);
@@ -47,7 +56,7 @@ export default function ChatBox(props) {
   }, []);
 
   const addMessage = (user_id, message) => {
-    dispatch({ type: "add-message", message, id });
+    dispatch({ type: "add-message", message, id: user_id });
   };
 
   const addHistory = message => {
@@ -58,7 +67,7 @@ export default function ChatBox(props) {
     const mount = () => {
       socket.emit("mount", target);
       axios
-        .post("chat/history", {
+        .post(`${baseURL}chat/history`, {
           username,
           target
         })
