@@ -5,11 +5,15 @@ import useForm from "./CustomHooks";
 import FrontPage from "./FrontPage.jsx";
 import UserProfile from "./UserProfile.jsx";
 import LoginPage from "./Authentication/LoginPage.jsx";
+import SignIn from "./Authentication/SignIn.jsx";
+
 import NavBar from "./NavBar.jsx";
 import NewPostForm from "./NewPostForm";
 import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export function App() {
   const [postingId, setPostingId] = useState(1);
@@ -30,8 +34,6 @@ export function App() {
       });
   };
 
-
-  
   const handleSelectPost = (e, postingId) => {
     console.log("handleSelectPost", postingId);
     setPostingId(postingId);

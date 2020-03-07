@@ -1,29 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
 import useUnload from "./useUnload.jsx";
 
+import { UserState, socket } from "../AppRouter.jsx";
+
 // import { useParams } from "react-router-dom";
 // const { target } = useParams();
 
-export default function ChatBox({
-  chats,
-  socket,
-  username,
-  addMessage,
-  addHistory,
-  id
-}) {
-  const checkTarget = username => {
-    if (username === "a") {
-      return "b";
-    } else {
-      return "a";
-    }
-  };
+// get username from Provider.Context
+// get id from Provider.Context
+
+//Bring addMessage and addHistory down to this component
+
+// get chats and reducer down to this level
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "add-message":
+      return [
+        ...state,
+        { message_text: action.message, from_username: action.user_id }
+      ];
+    case "add-history":
+      return [...state, ...action.message];
+    default:
+      return state;
+  }
+}
+
+export default function ChatBox(props) {
+  const { userInfo, dispatchContext } = useContext(UserState);
+  const { username, user_id } = userInfo;
+
+  const [chats, dispatch] = useReducer(reducer, []);
+
   const [message, setMessage] = useState("");
-  const [target, setTarget] = useState(checkTarget(username));
+
+  // need to fix
+  const [target, setTarget] = useState("d");
+
+  useEffect(() => {
+    console.log(chats);
+    socket.on("pm", addMessage.bind(null, "message-interlocutor"));
+  }, []);
+
+  const addMessage = (user_id, message) => {
+    dispatch({ type: "add-message", message, id });
+  };
+
+  const addHistory = message => {
+    dispatch({ type: "add-history", message });
+  };
 
   useEffect(() => {
     const mount = () => {
@@ -53,7 +82,7 @@ export default function ChatBox({
     displayChat.push(
       <div
         className={
-          id === chats[i].from_username
+          user_id === chats[i].from_username
             ? "message-self"
             : "message-interlocutor"
         }
@@ -75,7 +104,7 @@ export default function ChatBox({
       />
       <button
         onClick={event => {
-          addMessage(id, message);
+          addMessage(user_id, message);
           console.log(message);
           socket.emit("private", target, message);
         }}
