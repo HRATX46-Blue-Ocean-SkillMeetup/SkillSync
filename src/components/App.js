@@ -13,7 +13,6 @@ import WantSkills from "./userProfile/WantSkills";
 
 export function App() {
   const [postingId, setPostingId] = useState(1);
-  const [userId, setUserId] = useState(1);
 
   //submits any input data to the database
   const submit = () => {
@@ -30,8 +29,6 @@ export function App() {
       });
   };
 
-
-  
   const handleSelectPost = (e, postingId) => {
     console.log("handleSelectPost", postingId);
     setPostingId(postingId);
@@ -66,7 +63,7 @@ export function App() {
   //My Bookings
 
   //New Post
-  //<NewPostForm userId={userId} />
+  //<NewPostForm />
 
   //Search Results
 

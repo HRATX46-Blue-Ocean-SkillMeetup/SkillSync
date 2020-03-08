@@ -1,8 +1,6 @@
 const postingRoutes = app => {
   app.route("/rating").get((req, res) => {
     let userId = req.query.userId;
-    console.log("userId! ");
-    console.log(userId);
     pool.query(
       `select AVG(rating) as rating from review where user_id = ${userId};`,
       function(error, results) {
