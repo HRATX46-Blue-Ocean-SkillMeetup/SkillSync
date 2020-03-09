@@ -34,34 +34,31 @@ const ReviewPage = props => {
   };
 
   return (
-    <div className="reviewContainer">
+    <div>
       {/* <SearchBar /> */}
-      <div className="reviewPageTitle">{`Rate & Review`}</div>
-      {/* <div className="userFullName">{`${props.username}`}</div> */}
-      <div className="userFullName">{`bob`}</div>
-      <EditableStarRating
-        totalStars={5}
-        full={
-          "https://img.pngio.com/star-png-images-download-33366-star-png-resources-with-yellow-and-blue-png-360_360.png"
-        }
-        empty={
-          "https://www.festivalclaca.cat/pics/b/28/282884_star-outline-png.png"
-        }
-        width={"65px"}
-        height={"65px"}
-        setRating={handleRatingChange}
-      />
+      <img src={`./imgs/logos/Rate&Review.png`} className="review-page-title" />
+      <div className="review-container"></div>
+      {/* <div className="review-user-full-name">{`${props.username}`}</div> */}
+      <div className="review-user-full-name">{`bob`}</div>
+      <div className="review-stars">
+        <EditableStarRating
+          totalStars={5}
+          full={"./imgs/logos/pngfuel.com.png"}
+          empty={"./imgs/logos/PinClipart.com_six-point-star-clip_3949390.png"}
+          width={"74px"}
+          height={"74px"}
+          setRating={handleRatingChange}
+        />
+      </div>
       <textarea
-        className="reviewText"
+        className="review-text"
         // placeholder={`How is ${props.username} as a teacher?`}
         placeholder={`How is bob as a teacher?`}
-        id="review-text"
-        style={{ width: "500px", height: "300px", marginBottom: "50px" }}
         onChange={handleInputChange}
         value={inputs.reviewText}
       ></textarea>
-      <button className="reviewSubmitButton" onClick={handleSubmit}>
-        Review
+      <button className="review-submit-button" onClick={handleSubmit}>
+        <div className="review-button-text">Review</div>
       </button>
     </div>
   );
