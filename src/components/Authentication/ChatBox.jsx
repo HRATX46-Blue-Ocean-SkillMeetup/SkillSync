@@ -1,35 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
 import useUnload from "./useUnload.jsx";
 
-// import { useParams } from "react-router-dom";
-// const { target } = useParams();
+import { UserState, socket } from "../AppRouter.jsx";
 
-export default function ChatBox({
-  chats,
-  socket,
-  username,
-  addMessage,
-  addHistory,
-  id
-}) {
-  const checkTarget = username => {
-    if (username === "a") {
-      return "b";
+// get username from Provider.Context
+// get id from Provider.Context
+
+//Bring addMessage and addHistory down to this component
+
+// get chats and reducer down to this level
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "add-message":
+      return [
+        ...state,
+        { message_text: action.message, from_username: action.user_id }
+      ];
+    case "add-history":
+      return [...state, ...action.message];
+    default:
+      return state;
+  }
+}
+
+const baseURL = "http://localhost:3000/";
+
+export default function ChatBox(props) {
+  const { userInfo, dispatchContext } = useContext(UserState);
+  const { username, user_id } = userInfo;
+
+  const [chats, dispatch] = useReducer(reducer, []);
+
+  const [message, setMessage] = useState("");
+
+  // need to fix
+  const setTargetInit = username => {
+    if (username === "g") {
+      return "j";
     } else {
-      return "a";
+      return "g";
     }
   };
-  const [message, setMessage] = useState("");
-  const [target, setTarget] = useState(checkTarget(username));
+  const { target } = useParams();
+
+  console.log(target);
+
+  useEffect(() => {
+    console.log(chats);
+    socket.on("pm", addMessage.bind(null, "message-interlocutor"));
+  }, []);
+
+  const addMessage = (user_id, message) => {
+    dispatch({ type: "add-message", message, id: user_id });
+  };
+
+  const addHistory = message => {
+    dispatch({ type: "add-history", message });
+  };
 
   useEffect(() => {
     const mount = () => {
       socket.emit("mount", target);
       axios
-        .post("chat/history", {
+        .post(`${baseURL}chat/history`, {
           username,
           target
         })
@@ -53,7 +91,7 @@ export default function ChatBox({
     displayChat.push(
       <div
         className={
-          id === chats[i].from_username
+          user_id === chats[i].from_username
             ? "message-self"
             : "message-interlocutor"
         }
@@ -75,7 +113,7 @@ export default function ChatBox({
       />
       <button
         onClick={event => {
-          addMessage(id, message);
+          addMessage(user_id, message);
           console.log(message);
           socket.emit("private", target, message);
         }}

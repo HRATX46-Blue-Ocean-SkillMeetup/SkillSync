@@ -5,13 +5,23 @@ import useForm from "./CustomHooks";
 import FrontPage from "./FrontPage.jsx";
 import UserProfile from "./UserProfile.jsx";
 import LoginPage from "./Authentication/LoginPage.jsx";
+import SignIn from "./Authentication/SignIn.jsx";
+
 import NavBar from "./NavBar.jsx";
 import NewPostForm from "./NewPostForm";
 import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
 
-export function App() {
+import {
+  // BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
+
+const App = () => {
   const [postingId, setPostingId] = useState(1);
 
   //submits any input data to the database
@@ -82,4 +92,7 @@ export function App() {
       />
     </div>
   );
-}
+
+};
+
+export default withRouter(App);

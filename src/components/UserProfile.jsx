@@ -1,51 +1,67 @@
 import React, { useState, useEffect } from "react";
+
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch
+} from "react-router-dom";
+import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
+
 import axios from "axios";
+
+import ChatBox from "./Authentication/ChatBox.jsx";
 
 let promises = [
   axios.get(`http://localhost:3000/getUserProfile`, {
-      params: {
-        ID: 3,
-      },
-    }),
-  axios.get(`http://localhost:3000/getAverageReviews`, {
-      params: {
-        ID: 3,
-      },
-    }),
-  axios.get('http://localhost:3000/getMentorSkills', {
     params: {
-      ID: 3,
-    },
+      ID: 3
+    }
   }),
-  axios.get('http://localhost:3000/getMenteeSkills', {
+  axios.get(`http://localhost:3000/getAverageReviews`, {
     params: {
-      ID: 3,
-    },
+      ID: 3
+    }
+  }),
+  axios.get("http://localhost:3000/getMentorSkills", {
+    params: {
+      ID: 3
+    }
+  }),
+  axios.get("http://localhost:3000/getMenteeSkills", {
+    params: {
+      ID: 3
+    }
   })
-]
+];
 
 export default function UserProfile({ userId }) {
-
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(0);
-  const [mentorSkills, setMentorSkills] = useState(['kill']);
-  const [menteeSkills, setMenteeSkills] = useState(['people']);
+  const [mentorSkills, setMentorSkills] = useState(["kill"]);
+  const [menteeSkills, setMenteeSkills] = useState(["people"]);
+  const target = "g";
+
+  const match = useRouteMatch();
 
   useEffect(() => {
-    axios.all(promises)
-    .then(responseArray => {
-      setUserInfo(responseArray[0].data[0]);
-      setRating(5.0);
-      setMentorSkills(responseArray[2].data);
-      setMenteeSkills(responseArray[3].data);
-    })
-    .catch((err) => {
-      console.error('request failed');
-    })}, []);
-  
+    axios
+      .all(promises)
+      .then(responseArray => {
+        setUserInfo(responseArray[0].data[0]);
+        setRating(5.0);
+        setMentorSkills(responseArray[2].data);
+        setMenteeSkills(responseArray[3].data);
+      })
+      .catch(err => {
+        console.error("request failed");
+      });
+  }, []);
+
   return (
     <div className="profileContainer">
-      <div className="profileUserInfo">
+      {/* <div className="profileUserInfo">
         <div className="profileRow1">
           <span className="userPhotoProfile">
             <img src={userInfo.user_photo} width="140"/>
@@ -58,12 +74,12 @@ export default function UserProfile({ userId }) {
             Bio: {userInfo.bio} <br />
           </span>
         </div>
-      </div>
+      </div> */}
       <div className="profileContact">
         <button>REQUEST</button>
-        <button>MESSAGE</button>
+        <Link to={`${match.url}/chatbox/${target}`}>Send Message</Link>
       </div>
-      <div className="skillsTeachContainer, clearBackground">
+      {/* <div className="skillsTeachContainer, clearBackground">
         <div className="profileSectionTitle">
           SKILLS I TEACH
         </div>
@@ -87,7 +103,13 @@ export default function UserProfile({ userId }) {
           YOU CAN'T ADD A REVIEW. YET.
         </div>
         <button>REVIEW LATER</button>
-      </div>
+      </div> */}
+      <Switch>
+        <PrivateRoute
+          path={`${match.path}/chatbox/:target`}
+          component={ChatBox}
+        />
+      </Switch>
     </div>
   );
-};
+}

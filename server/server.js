@@ -113,7 +113,6 @@ app.get("/getSkills", (req, res) => {
   );
 });
 
-
 app.get("/postings", (req, res) => {
   pool.query(
     `SELECT
@@ -168,6 +167,18 @@ app.get("/search/postings", (req, res) => {
       res.status(200).send(data);
     }
   );
+});
+
+// app.get("/*", (req, res) => {
+//   res.send(express.static(path.join(__dirname, "../dist")));
+// });
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "../dist/index.html"), function(err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 server.listen(port, () => console.log("port " + port + " is on"));
