@@ -3,6 +3,9 @@
   200,
   300&display=swap
 );
+.posting-bigContainer {
+  padding-top: 30px;
+}
 
 .posting-postingDetailsContainer {
   display: flex;
@@ -10,7 +13,15 @@
   background-color: #f0f0f0;
   border-radius: 4px;
   padding: 6px;
-  margin: 30px 5px;
+  margin: 0px 7px 30px 7px;
+}
+
+.posting-header {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 .posting-smallContainer {
@@ -83,4 +94,61 @@
   width: 190px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.posting-mainContainer {
+  padding: 20px 10px;
+}
+
+.posting-inputDropdown {
+  margin-bottom: 30px;
+}
+
+.posting-dropdown {
+  font-family: "Roboto", sans-serif;
+  background-color: #e5e5e5;
+  color: #656565;
+  width: 300px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.posting-newForm {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  background-image: linear-gradient(#68aa80, #98c460, #60c3ab);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.posting-newPostText {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.posting-newPostDescription {
+  width: 300px;
+  height: 180px;
+  border-radius: 4px;
+  background-color: #e5e5e5;
+  box-shadow: inset 0px 4px 2px rgba(0, 0, 0, 0.36);
+  border: none;
+  color: #656565;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.posting-postButton {
+  width: 190px;
+  height: 40px;
+  color: #237553;
+  font-size: 20px;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }

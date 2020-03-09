@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 function NewPostForm(props) {
   const [selectedSkill, setSelectedSkill] = useState({});
   const [skills, setSkills] = useState([]);
   const [newDescription, setNewDescription] = useState("");
+
+  // const { userInfo} = useContext(UserState);
+  // const user_id = userInfo.user_id;
+  const user_id = 1;
 
   const handleChange = event => {
     setNewDescription(event.target.value);
@@ -16,19 +20,18 @@ function NewPostForm(props) {
 
   const handleNewPostClick = event => {
     console.log(selectedSkill);
-    console.log(props.userId);
     console.log(newDescription);
     axios
       .post("/addPosting", {
         skillId: selectedSkill,
         description: newDescription,
-        userId: props.userId
+        userId: user_id
       })
       .then();
   };
 
   useEffect(() => {
-    axios.get(`/getSkills/${props.userId}`).then(function(response) {
+    axios.get(`/getSkills/${user_id}`).then(function(response) {
       const skillsArray = [];
       response.data.forEach(obj => {
         skillsArray.push({
@@ -41,25 +44,33 @@ function NewPostForm(props) {
   });
 
   return (
-    <div className="newPostForm">
-      <div className="inputDropdown">
-        <p className="newPostText">What do you want to teach?</p>
-        <select onChange={handleSkillChange}>
-          <option value="">Choose from your skills</option>
-          {skills.map((skill, index) => {
-            return (
-              <option key={index} value={skill.id}>
-                {skill.skill}
-              </option>
-            );
-          })}
-        </select>
+    <div className="posting-mainContainer">
+      <h1 className="posting-header">New Post</h1>
+      <div className="posting-newForm">
+        <div className="posting-inputDropdown">
+          <p className="posting-newPostText">What do you want to teach?</p>
+          <select onChange={handleSkillChange} className="posting-dropdown">
+            <option value="">Choose from your skills</option>
+            {skills.map((skill, index) => {
+              return (
+                <option key={index} value={skill.id}>
+                  {skill.skill}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="posting-inputText">
+          <p className="posting-newPostText">Enter a brief description:</p>
+          <textarea
+            className="posting-newPostDescription"
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <button className="posting-postButton" onClick={handleNewPostClick}>
+          POST
+        </button>
       </div>
-      <div className="inputText">
-        <p className="newPostText">Enter a brief description</p>
-        <textarea onChange={handleChange}>{props.skillDescription}</textarea>
-      </div>
-      <button onClick={handleNewPostClick}>POST</button>
     </div>
   );
 }
