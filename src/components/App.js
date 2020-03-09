@@ -12,6 +12,7 @@ import NewPostForm from "./NewPostForm";
 import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
+import Messages from "./Messages";
 
 import {
   // BrowserRouter as Router,
@@ -56,7 +57,7 @@ const App = () => {
   // <FrontPage />
 
   //Messages List
-
+  //<Messages />
   //Single Chat
 
   //Log In / Sign up, takes in custom form hooks
