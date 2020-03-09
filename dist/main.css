@@ -129,6 +129,7 @@ body {
   position: relative;
   color: #98c460;
   background: white;
+  display: inline;
 }
 .bottom-right {
   text-align: end;
@@ -137,6 +138,8 @@ body {
   top: 174px;
   font-size: 30px;
   background: white;
+  display: inline-block;
+  float: right;
 }
 /* User Profile */
 .profileRow1 {
@@ -220,6 +223,63 @@ hr {
   /* top: 97.35%; */
   bottom: 2.65%;
   border-bottom: 1px solid #98c460;
+}
+
+.desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  /* home page desktop */
+  .squares {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2%;
+    width: 100%;
+  }
+  .desktop {
+    display: block;
+  }
+
+  .featuredMentorContainer {
+    height: auto;
+    width: 100%;
+    top: 4px;
+    position: relative;
+  }
+
+  .userPhotoFeatured {
+    background-size: cover;
+  }
+  .bottom-left {
+    top: 75%;
+    position: relative;
+    color: darkgreen;
+    font-weight: 700;
+    display: block;
+    background: none;
+  }
+  .bottom-right {
+    text-align: end;
+    color: #fff;
+    position: relative;
+    top: 75%;
+    font-size: 50px;
+    display: block;
+    margin-left: 0%;
+    background: none;
+  }
+  .categorySquare {
+    flex: 0 50%;
+  }
+  .categoryIconList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .quote {
+    font-size: 50px;
+    margin: 0 20%;
+  }
 }
 
 /* james */

@@ -23,8 +23,8 @@ export default function FrontPage() {
           </div>
           <div className="featuredMentorContainer">
             <div className="userPhotoFeatured">
-              <div class="bottom-left">FEATURED MENTOR</div>
-              <div class="bottom-right">BRADLEY</div>
+              <div className="bottom-left">FEATURED MENTOR</div>
+              <div className="bottom-right">BRADLEY</div>
             </div>
           </div>
         </div>
@@ -37,27 +37,21 @@ export default function FrontPage() {
         </div>
         <div className="categoryIconList">
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/Crafts.png"}
           />
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/VisualArt.png"}
           />
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/MathScience.png"}
           />
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/Food.png"}
           />
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/SocialSciences.png"}
           />
           <CategorySquare
-            large={true}
             name={"../../imgs/categories/Miscellaneous.png"}
           />
         </div>
