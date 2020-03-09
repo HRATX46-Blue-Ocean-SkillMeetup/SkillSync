@@ -18,4 +18,21 @@ const chatHistory = (app, getUserIds, setVisited) => {
   });
 };
 
+const chatLog = (req, res) => {
+  // const username = socket.username;
+  const { user_id } = req.body;
+  pool.query(
+    `SELECT * FROM message WHERE to_username='${user_id}' ORDER BY visited ASC`,
+    function(error, results) {
+      if (results) {
+        res.status(200).send(results);
+      } else {
+        console.log(error);
+        res.status(500).send();
+      }
+    }
+  );
+};
+
 module.exports.chatHistory = chatHistory;
+module.exports.chatLog = chatLog;

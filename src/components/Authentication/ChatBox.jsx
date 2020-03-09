@@ -38,14 +38,6 @@ export default function ChatBox(props) {
 
   const [message, setMessage] = useState("");
 
-  // need to fix
-  const setTargetInit = username => {
-    if (username === "g") {
-      return "j";
-    } else {
-      return "g";
-    }
-  };
   const { target } = useParams();
 
   console.log(target);

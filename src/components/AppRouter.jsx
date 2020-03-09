@@ -17,6 +17,7 @@ import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 import LoginPage from "./Authentication/LoginPage.jsx";
 import SignIn from "./Authentication/SignIn.jsx";
 import ChatBox from "./Authentication/ChatBox.jsx";
+import MessageLog from "./Authentication/MessageLog.jsx";
 import { App } from "./App.js";
 
 import NavBar from "./NavBar.jsx";
@@ -67,6 +68,9 @@ const AppRouter = () => {
           <li>
             <Link to="/home/">Home</Link>
           </li>
+          <li>
+            <Link to={"/message/log/"}>MessageLog</Link>
+          </li>
         </ul>
       </nav>
 
@@ -83,6 +87,10 @@ const AppRouter = () => {
           </Route>
           <Route path="/home/">
             <FrontPage />
+          </Route>
+          <Route path="/message/log">
+            <MessageLog />
+            {/* <PrivateRoute path="/message/log/" component={MessageLog} /> */}
           </Route>
         </UserState.Provider>
       </Switch>
