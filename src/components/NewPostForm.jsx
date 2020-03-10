@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
 import axios from "axios";
+
+import { UserState } from "./AppRouter.jsx";
 
 function NewPostForm(props) {
   const [selectedSkill, setSelectedSkill] = useState({});
   const [skills, setSkills] = useState([]);
   const [newDescription, setNewDescription] = useState("");
+  const context = useContext(UserState);
+  const { userInfo } = context;
+  const { user_id } = userInfo;
 
   const handleChange = event => {
     setNewDescription(event.target.value);
@@ -16,19 +22,19 @@ function NewPostForm(props) {
 
   const handleNewPostClick = event => {
     console.log(selectedSkill);
-    console.log(props.userId);
+    console.log(user_id);
     console.log(newDescription);
     axios
       .post("/addPosting", {
         skillId: selectedSkill,
         description: newDescription,
-        userId: props.userId
+        userId: user_id
       })
       .then();
   };
 
   useEffect(() => {
-    axios.get(`/getSkills/${props.userId}`).then(function(response) {
+    axios.get(`/getSkills/${user_id}`).then(function(response) {
       const skillsArray = [];
       response.data.forEach(obj => {
         skillsArray.push({
@@ -38,7 +44,7 @@ function NewPostForm(props) {
       });
       setSkills(skillsArray);
     });
-  });
+  }, []);
 
   return (
     <div className="newPostForm">
@@ -57,7 +63,7 @@ function NewPostForm(props) {
       </div>
       <div className="inputText">
         <p className="newPostText">Enter a brief description</p>
-        <textarea onChange={handleChange}>{props.skillDescription}</textarea>
+        <textarea onChange={handleChange}></textarea>
       </div>
       <button onClick={handleNewPostClick}>POST</button>
     </div>

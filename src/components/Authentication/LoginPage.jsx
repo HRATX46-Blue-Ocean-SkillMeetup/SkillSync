@@ -30,7 +30,7 @@ export default function LoginPage() {
           password
         })
         .then(data => {
-          history.push("/home/");
+          history.push("/");
           dispatchContext({
             type: "set-user",
             username: data.data.username,
@@ -39,9 +39,9 @@ export default function LoginPage() {
           socket.emit("login", data.data.username, null);
           console.log("logged in");
         })
-        // .then(data => {
+        // .then(x => {
+        //   history.push("/home/");
         // })
-
         .catch(error => {
           console.log(error);
         });

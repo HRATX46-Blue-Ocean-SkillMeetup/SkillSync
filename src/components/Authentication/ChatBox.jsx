@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
@@ -31,8 +31,11 @@ function reducer(state, action) {
 const baseURL = "http://localhost:3000/";
 
 export default function ChatBox(props) {
-  const { userInfo, dispatchContext } = useContext(UserState);
-  const { username, user_id } = userInfo;
+  const context = useContext(UserState);
+  const { userInfo, dispatchContext } = context;
+  const { user_id, username } = userInfo;
+  const location = useLocation();
+  const { from_username, to_username } = location.state;
 
   const [chats, dispatch] = useReducer(reducer, []);
 
@@ -61,7 +64,9 @@ export default function ChatBox(props) {
       axios
         .post(`${baseURL}chat/history`, {
           username,
-          target
+          target,
+          from_username,
+          to_username
         })
         .then(data => {
           addHistory(data.data);

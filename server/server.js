@@ -45,7 +45,7 @@ app.use(
 userProfileRoutes(app);
 // addReviewsRoute(app);
 signInLogInRoutes(app);
-chatHistory(app, getUserIds, setVisited);
+chatHistory(app, setVisited);
 app.post("/chat/log", chatLog);
 postingRoutes(app);
 

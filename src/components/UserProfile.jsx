@@ -43,8 +43,6 @@ export default function UserProfile({ userId }) {
   const [menteeSkills, setMenteeSkills] = useState(["people"]);
   const target = "g";
 
-  const match = useRouteMatch();
-
   useEffect(() => {
     axios
       .all(promises)
@@ -77,7 +75,7 @@ export default function UserProfile({ userId }) {
       </div> */}
       <div className="profileContact">
         <button>REQUEST</button>
-        <Link to={`${match.url}/chatbox/${target}`}>Send Message</Link>
+        <Link to={`/chatbox/${target}`}>Send Message</Link>
       </div>
       {/* <div className="skillsTeachContainer, clearBackground">
         <div className="profileSectionTitle">
@@ -104,12 +102,12 @@ export default function UserProfile({ userId }) {
         </div>
         <button>REVIEW LATER</button>
       </div> */}
-      <Switch>
-        <PrivateRoute
-          path={`${match.path}/chatbox/:target`}
-          component={ChatBox}
-        />
-      </Switch>
+      {/* <Switch>
+        <PrivateRoute path={`${match.path}/chatbox/:target`}>
+          {" "}
+          <ChatBox />
+        </PrivateRoute>
+      </Switch> */}
     </div>
   );
 }

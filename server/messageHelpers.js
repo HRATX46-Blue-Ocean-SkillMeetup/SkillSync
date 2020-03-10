@@ -1,11 +1,13 @@
 // retrieves both user ids needed to send/receive messages
 const getUserIds = (username, target, cb) => {
+  console.log(`username ${username} targert ${target}`);
   pool.query(
     `SELECT user_id FROM user WHERE username='${username}' OR username='${target}'`,
     function(error, results) {
       if (error) {
         console.log(error);
       } else {
+        console.log("results " + JSON.stringify(results));
         cb(results[0].user_id, results[1].user_id);
       }
     }
@@ -29,9 +31,9 @@ const insertMessage = (message, bool, username, target) => {
 };
 
 //ensure previously unread messages are marked as visited
-const setVisited = (userA, userB) => {
+const setVisited = (from, to) => {
   pool.query(
-    `UPDATE message SET visited=true WHERE from_username='${userA}' AND to_username='${userB}' OR from_username='${userB}' AND to_username='${userA}' ORDER BY message_date ASC`,
+    `UPDATE message SET visited=true WHERE from_username='${from}' AND to_username='${to}'`,
     function(error, results) {
       if (error) {
         res.status(500).send();

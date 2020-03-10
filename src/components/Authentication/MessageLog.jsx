@@ -1,12 +1,23 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch
+} from "react-router-dom";
+import { PrivateRoute } from "./PrivateRoute.jsx";
+import ChatBox from "./ChatBox.jsx";
 
 import { UserState } from "../AppRouter.jsx";
 
 export default function MessageLog(props) {
-  //   const { userInfo } = useContext(UserState);
-  //   const { username, user_id } = userInfo;
-  const user_id = "52";
+  const context = useContext(UserState);
+  const { userInfo } = context;
+  const { user_id } = userInfo;
+  console.log(user_id);
+
   const [messageLog, setMessageLog] = useState([]);
 
   const generateMessageArray = () => {
@@ -16,6 +27,8 @@ export default function MessageLog(props) {
       if (uniqueMessenger[current.from_username] === undefined) {
         uniqueMessenger[current.from_username] = {
           from_username: current.from_username,
+          to_username: current.to_username,
+          username: current.username,
           visited: current.visited,
           message_text: current.message_text,
           message_date: current.message_date
@@ -30,11 +43,21 @@ export default function MessageLog(props) {
         ? "message-not-visited"
         : "message-visited";
       render.push(
-        <div className={className} key={i}>
-          {" "}
-          Message: {current.message_text} from {current.from_username} sent on{" "}
-          {current.message_date}{" "}
-        </div>
+        <Link
+          to={{
+            pathname: `/chatbox/${current.username}`,
+            state: {
+              from_username: current.from_username,
+              to_username: current.to_username
+            }
+          }}
+        >
+          <div className={className} key={i}>
+            {" "}
+            Message: {current.message_text} from {current.username} sent on{" "}
+            {current.message_date}{" "}
+          </div>
+        </Link>
       );
     }
     return render;
@@ -54,7 +77,9 @@ export default function MessageLog(props) {
       });
   }, []);
 
-  return <div>{generateMessageArray()}</div>;
+  return (
+    <div>
+      <div className="message-log">{generateMessageArray()}</div>
+    </div>
+  );
 }
-
-// refactor query and css style
