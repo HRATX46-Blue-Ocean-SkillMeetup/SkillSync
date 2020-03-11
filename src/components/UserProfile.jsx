@@ -7,14 +7,12 @@ import axios from "axios";
 
 import ChatBox from "./Authentication/ChatBox.jsx";
 
-export default function UserProfile() {
+export default function UserProfile({ otherUserId }) {
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(0);
   const [menteeSkills, setMenteeSkills] = useState(["React Router"]);
   const [mentorSkills, setMentorSkills] = useState(["Barbecuing"]);
   const target = "g";
-
-  let otherUserId = useRouteMatch("/:slug");
 
   useEffect(() => {
     axios
