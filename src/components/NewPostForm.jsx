@@ -13,7 +13,6 @@ function NewPostForm(props) {
 
   // const { userInfo} = useContext(UserState);
   // const user_id = userInfo.user_id;
-  const user_id = 1;
 
   const handleChange = event => {
     setNewDescription(event.target.value);
