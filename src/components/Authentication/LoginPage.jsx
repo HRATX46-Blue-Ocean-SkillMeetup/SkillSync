@@ -30,18 +30,18 @@ export default function LoginPage() {
           password
         })
         .then(data => {
-          history.push("/home/");
+          history.push("/");
           dispatchContext({
             type: "set-user",
             username: data.data.username,
             user_id: data.data.id
           });
-          socket.emit("login", data.data.username, null);
+          socket.emit("login", data.data.id);
           console.log("logged in");
         })
-        // .then(data => {
+        // .then(x => {
+        //   history.push("/home/");
         // })
-
         .catch(error => {
           console.log(error);
         });

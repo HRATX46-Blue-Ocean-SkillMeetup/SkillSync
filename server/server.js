@@ -16,7 +16,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const { userProfileRoutes } = require("./routes/userProfile.js");
 const { addReviewsRoute } = require("./routes/addReview.js");
 
-const { chatHistory } = require("./routes/chatHistory");
+const { chatHistory, chatLog } = require("./routes/chatHistory");
 const { signInLogInRoutes } = require("./routes/signInLogIn");
 const { getUserIds, insertMessage, setVisited } = require("./messageHelpers");
 const { postingRoutes } = require("./routes/posting.js");
@@ -45,19 +45,9 @@ app.use(
 userProfileRoutes(app);
 // addReviewsRoute(app);
 signInLogInRoutes(app);
-chatHistory(app, getUserIds, setVisited);
+chatHistory(app, setVisited);
+app.post("/chat/log", chatLog);
 postingRoutes(app);
-
-app.route("/test").get((req, res) => {
-  pool.query(`SELECT * FROM test`, function(error, results) {
-    if (error) {
-      res.status(500).send();
-    } else {
-      console.log("hi");
-      res.status(200).send(results);
-    }
-  });
-});
 
 app.get("/search", (req, res) => {
   pool.query(

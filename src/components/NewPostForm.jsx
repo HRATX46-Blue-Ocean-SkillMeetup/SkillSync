@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
+import { UserState } from "./AppRouter.jsx";
+
 function NewPostForm(props) {
   const [selectedSkill, setSelectedSkill] = useState({});
   const [skills, setSkills] = useState([]);
   const [newDescription, setNewDescription] = useState("");
+  const context = useContext(UserState);
+  const { userInfo } = context;
+  const { user_id } = userInfo;
 
   // const { userInfo} = useContext(UserState);
   // const user_id = userInfo.user_id;
@@ -41,7 +46,7 @@ function NewPostForm(props) {
       });
       setSkills(skillsArray);
     });
-  });
+  }, []);
 
   return (
     <div className="posting-mainContainer">

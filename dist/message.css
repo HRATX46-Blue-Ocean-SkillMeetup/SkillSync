@@ -23,3 +23,11 @@
   overflow-anchor: auto;
   height: 1px;
 }
+
+.message-not-visited {
+  color: orange;
+}
+
+.message-visited {
+  color: pink;
+}

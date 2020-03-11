@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import InputField from "./InputField.jsx";
@@ -31,21 +31,16 @@ function reducer(state, action) {
 const baseURL = "http://localhost:3000/";
 
 export default function ChatBox(props) {
-  const { userInfo, dispatchContext } = useContext(UserState);
-  const { username, user_id } = userInfo;
+  const context = useContext(UserState);
+  const { userInfo, dispatchContext } = context;
+  const { user_id, username } = userInfo;
+  const location = useLocation();
+  const { from_username, to_username } = location.state;
 
   const [chats, dispatch] = useReducer(reducer, []);
 
   const [message, setMessage] = useState("");
 
-  // need to fix
-  const setTargetInit = username => {
-    if (username === "g") {
-      return "j";
-    } else {
-      return "g";
-    }
-  };
   const { target } = useParams();
 
   console.log(target);
@@ -56,7 +51,7 @@ export default function ChatBox(props) {
   }, []);
 
   const addMessage = (user_id, message) => {
-    dispatch({ type: "add-message", message, id: user_id });
+    dispatch({ type: "add-message", message, user_id });
   };
 
   const addHistory = message => {
@@ -65,11 +60,14 @@ export default function ChatBox(props) {
 
   useEffect(() => {
     const mount = () => {
-      socket.emit("mount", target);
+      console.log(username, target, from_username, to_username);
+      socket.emit("mount", to_username);
       axios
         .post(`${baseURL}chat/history`, {
           username,
-          target
+          target,
+          from_username,
+          to_username
         })
         .then(data => {
           addHistory(data.data);
@@ -114,8 +112,7 @@ export default function ChatBox(props) {
       <button
         onClick={event => {
           addMessage(user_id, message);
-          console.log(message);
-          socket.emit("private", target, message);
+          socket.emit("private", from_username, to_username, target, message);
         }}
       >
         Send
