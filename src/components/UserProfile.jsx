@@ -7,44 +7,38 @@ import axios from "axios";
 
 import ChatBox from "./Authentication/ChatBox.jsx";
 
-let promises = [
-  axios.get(`http://localhost:3000/getUserProfile`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get(`http://localhost:3000/getAverageReviews`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMentorSkills", {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMenteeSkills", {
-    params: {
-      ID: 3
-    }
-  })
-];
-
-export default function UserProfile({ userId }) {
+export default function UserProfile({ otherUserId }) {
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(0);
-  const [menteeSkills, setMenteeSkills] = useState(["people"]);
-  const [mentorSkills, setMentorSkills] = useState(["skill"]);
+  const [menteeSkills, setMenteeSkills] = useState(["React Router"]);
+  const [mentorSkills, setMentorSkills] = useState(["Barbecuing"]);
   const target = "g";
 
   useEffect(() => {
     axios
-      .all(promises)
+      .all([
+        axios.get(`http://localhost:3000/getUserProfile`, {
+          params: {
+            ID: otherUserId
+          }
+        }),
+        axios.get("http://localhost:3000/getMentorSkills", {
+          params: {
+            ID: otherUserId
+          }
+        }),
+        axios.get("http://localhost:3000/getMenteeSkills", {
+          params: {
+            ID: otherUserId
+          }
+        })
+      ])
       .then(responseArray => {
         setUserInfo(responseArray[0].data[0]);
-        setRating(5.0);
-        setMentorSkills(responseArray[2].data);
-        setMenteeSkills(responseArray[3].data);
+        let userRating = responseArray[0].data[0].rating || 5.0;
+        setRating(userRating);
+        setMentorSkills(responseArray[1].data);
+        setMenteeSkills(responseArray[2].data);
       })
       .catch(err => {
         console.error("request failed");
