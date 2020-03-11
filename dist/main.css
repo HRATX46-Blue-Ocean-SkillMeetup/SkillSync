@@ -201,6 +201,10 @@ body {
   padding: 0 2%;
   position: absolute;
   top: 8%;
+  z-index: 5;
+}
+.navDrawer a {
+  text-decoration: none;
 }
 .navLink:hover {
   color: #38755d;

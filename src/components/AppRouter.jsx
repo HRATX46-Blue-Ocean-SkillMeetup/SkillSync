@@ -5,12 +5,10 @@ import React, {
   useReducer,
   useContext
 } from "react";
-import axios from "axios";
 import io from "socket.io-client";
 
 import FrontPage from "./FrontPage.jsx";
 import UserProfile from "./UserProfile.jsx";
-
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 import LoginPage from "./Authentication/LoginPage.jsx";
 import SignIn from "./Authentication/SignIn.jsx";
@@ -19,14 +17,10 @@ import MessageLog from "./Authentication/MessageLog.jsx";
 import ReviewPage from "./ReviewPage.js";
 import NavBar from "./NavBar.jsx";
 import NewPostForm from "./NewPostForm.jsx";
+import PostingDetailsContainer from "./PostingDetailsContainer";
 
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  withRouter
-} from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
+import PostingList from "./PostingList.js";
 
 const socketUrl = "http://localhost:3000";
 export const socket = io(socketUrl);
@@ -57,6 +51,15 @@ const SwitchPath = (userInfo, dispatchContext) => {
         </Route>
         <Route path="/signup/">
           <SignIn />
+        </Route>
+        <Route path="/search?q=:query">
+          <PostingList />
+        </Route>
+        <Route path="/search/postings/">
+          <PostingList />
+        </Route>
+        <Route path="/postings/:id">
+          <PostingDetailsContainer />
         </Route>
         <PrivateRoute path="/message/log/">
           <MessageLog />
@@ -96,72 +99,13 @@ const AppRouter = () => {
     dispatchContext({ type: "notification", user: "test" });
   };
 
-  if (!userInfo.username.length) {
-    return (
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/login/">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup/">SignUp</Link>
-            </li>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {SwitchPath(userInfo, dispatchContext)}
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/message/log">My Messages</Link>
-            </li>
-            <li>
-              <Link to={`/profile/${userInfo.username}`}>My Profile</Link>
-            </li>
-            <li>
-              <Link to="/newpost/">Make a new Post</Link>
-            </li>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              Log Out
-              {/* <Link to="/logout/">Log Out</Link> */}
-            </li>
-          </ul>
-        </nav>
-
-        {SwitchPath(userInfo, dispatchContext)}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <NavBar loggedIn={userInfo.username.length} userInfo={userInfo} />
+      {SwitchPath(userInfo, dispatchContext)}
+    </div>
+  );
 };
 
 export default withRouter(AppRouter);
 
-// need logic in profile component that checks
-
-{
-  /* <PrivateRoute path="/chatbox/" component={ChatBox} /> */
-}
-
-// const submitLogOut = () => {
-//   axios
-//     .get("/user/logout")
-//     .then(data => {
-//       setLogged(false);
-//       console.log("logged out");
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// };

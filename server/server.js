@@ -107,6 +107,7 @@ app.get("/postings", (req, res) => {
   pool.query(
     `SELECT
     s.skill,
+    u.user_id,
     u.username,
     u.location,
     u.city,
@@ -115,7 +116,8 @@ app.get("/postings", (req, res) => {
     u.rating,
     p.role,
     p.creation_date,
-    p.posting_id
+    p.posting_id,
+    p.description
     FROM posting p 
     LEFT JOIN user u
       on p.user_id=u.user_id
@@ -135,6 +137,7 @@ app.get("/search/postings", (req, res) => {
   pool.query(
     `SELECT
     s.skill,
+    u.user_id,
     u.username,
     u.location,
     u.city,
@@ -143,7 +146,8 @@ app.get("/search/postings", (req, res) => {
     u.rating,
     p.role,
     p.creation_date,
-    p.posting_id
+    p.posting_id,
+    p.description
     FROM posting p 
     LEFT JOIN user u
       on p.user_id=u.user_id
