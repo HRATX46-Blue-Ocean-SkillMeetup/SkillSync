@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch
-} from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute.jsx";
 import ChatBox from "./ChatBox.jsx";
 
@@ -39,7 +33,7 @@ export default function MessageLog(props) {
     const values = Object.values(uniqueMessenger);
     for (let i = 0; i < values.length; i++) {
       let current = values[i];
-      let className = current.visisted
+      let className = !current.visited
         ? "message-not-visited"
         : "message-visited";
       render.push(

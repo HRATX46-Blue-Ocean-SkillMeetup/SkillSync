@@ -36,6 +36,7 @@ const socketInit = insertMessage => {
         if (connectedUsers[to_username]) {
           const { chatroom, socketId } = connectedUsers[to_username];
           if (chatroom !== from_username) {
+            io.to(`${socketId}`).emit("notification", from_username);
             insertMessage(message, false, from_username, to_username);
             console.log("1: wrong chatroom");
           } else {

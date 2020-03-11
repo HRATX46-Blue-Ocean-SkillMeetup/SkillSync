@@ -30,12 +30,19 @@ import {
 
 const socketUrl = "http://localhost:3000";
 export const socket = io(socketUrl);
-export const UserState = createContext({ username: "", user_id: 0 });
+export const UserState = createContext({
+  username: "",
+  user_id: 0,
+  notification: false
+});
 
 const UserStateReducer = (state, action) => {
+  console.log(state["newMessage"]);
   switch (action.type) {
     case "set-user":
-      return { username: action.username, user_id: action.user_id };
+      return { ...state, username: action.username, user_id: action.user_id };
+    case "notification":
+      return { ...state, notification: true };
     default:
       return state;
   }
@@ -79,7 +86,16 @@ const AppRouter = () => {
     UserStateReducer,
     useContext(UserState)
   );
-  //!userInfo.username.length
+
+  useEffect(() => {
+    socket.on("notification", addNotification);
+  }, []);
+
+  const addNotification = from_username => {
+    console.log("addNotification ran", from_username);
+    dispatchContext({ type: "notification", user: "test" });
+  };
+
   if (!userInfo.username.length) {
     return (
       <div>

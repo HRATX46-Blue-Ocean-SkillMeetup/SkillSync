@@ -5,7 +5,7 @@ const chatHistory = (app, setVisited) => {
       `SELECT * FROM message WHERE from_username='${from_username}' AND to_username='${to_username}' OR from_username='${to_username}' AND to_username='${from_username}' ORDER BY message_date ASC`,
       function(error, results) {
         if (results) {
-          setVisited(from_username, to_username);
+          setVisited(to_username, from_username);
           res.status(200).send(results);
         } else {
           console.log(error);

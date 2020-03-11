@@ -6,7 +6,6 @@ import { UserState } from "../AppRouter.jsx";
 export const PrivateRoute = ({ children, ...props }) => {
   const { userInfo } = useContext(UserState);
   const { username } = userInfo;
-  console.log(username.length, "outside");
   return (
     <Route
       // puts all props in the Route Component
@@ -18,15 +17,8 @@ export const PrivateRoute = ({ children, ...props }) => {
           children
         ) : (
           <Redirect to="/login/" />
-          // <div>hello</div>
         );
       }}
     />
   );
 };
-
-// { component: Component
-{
-  /* <Component {...innerProps} /> */
-}
-// history.push("/home/");
