@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Suggestion = ({
   searchSuggestions,
-  showSuggestions,
-  handleSuggestionClick
+  handleSuggestionClick,
+  searchTerm,
+  showSuggestions
 }) => {
   return (
     <div
@@ -13,14 +15,20 @@ const Suggestion = ({
       <ul className="search">
         {searchSuggestions.length > 0 &&
           searchSuggestions.map(({ skill, skill_id }) => (
-            <li
-              className="suggestion-item"
-              key={skill_id}
-              value={skill_id}
+            <Link
+              to={{
+                pathname: `/search?q=${searchTerm}`,
+                state: {
+                  skill_id: skill_id
+                }
+              }}
               onClick={handleSuggestionClick}
+              key={skill_id}
             >
-              {skill}
-            </li>
+              <li className="suggestion-item" value={skill_id}>
+                {skill}
+              </li>
+            </Link>
           ))}
       </ul>
     </div>

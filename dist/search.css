@@ -141,7 +141,10 @@ form {
   background-color: black;
   margin: 6px 0;
 }
-
+.search a {
+  text-decoration: none;
+  color: #333;
+}
 .search-suggestions {
   text-decoration: none;
   position: absolute;
