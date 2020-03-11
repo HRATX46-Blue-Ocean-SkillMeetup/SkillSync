@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch
-} from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 
 import axios from "axios";
@@ -59,10 +53,10 @@ export default function UserProfile({ userId }) {
 
   return (
     <div className="profileContainer">
-      {/* <div className="profileUserInfo">
+      <div className="profileUserInfo">
         <div className="profileRow1">
           <span className="userPhotoProfile">
-            <img src={userInfo.user_photo} width="140"/>
+            <img src={userInfo.user_photo} width="140" />
             <br />
             <span className="Rating">{rating} &#9733;</span> <br />
           </span>
@@ -72,42 +66,34 @@ export default function UserProfile({ userId }) {
             Bio: {userInfo.bio} <br />
           </span>
         </div>
-      </div> */}
+      </div>
       <div className="profileContact">
         <button>REQUEST</button>
         <Link to={`/chatbox/${target}`}>Send Message</Link>
       </div>
-      {/* <div className="skillsTeachContainer, clearBackground">
-        <div className="profileSectionTitle">
-          SKILLS I TEACH
-        </div>
+      <div className="skillsTeachContainer, clearBackground">
+        <div className="profileSectionTitle">SKILLS I TEACH</div>
         <div className="skills">
-          {mentorSkills.map(skill => <div key={skill.skill}>{skill.skill}</div>)}
+          {mentorSkills.map(skill => (
+            <div key={skill.skill}>{skill.skill}</div>
+          ))}
         </div>
       </div>
       <div className="skillsLearnContainer, clearBackground">
-        <div className="profileSectionTitle">
-          I WANT TO LEARN
-        </div>
+        <div className="profileSectionTitle">I WANT TO LEARN</div>
         <div className="skills">
-          {menteeSkills.map(skills => <div key={skills.skill}>{skills.skill}</div>)}
+          {menteeSkills.map(skills => (
+            <div key={skills.skill}>{skills.skill}</div>
+          ))}
         </div>
       </div>
       <div className="reviewsContainer">
-        <div className="profileSectionTitle">
-          REVIEWS
-        </div>
-        <div className="reviewsContainer">
-          YOU CAN'T ADD A REVIEW. YET.
-        </div>
-        <button>REVIEW LATER</button>
-      </div> */}
-      {/* <Switch>
-        <PrivateRoute path={`${match.path}/chatbox/:target`}>
-          {" "}
-          <ChatBox />
-        </PrivateRoute>
-      </Switch> */}
+        <div className="profileSectionTitle">REVIEWS</div>
+        <div className="reviewsContainer">YOU CAN'T ADD A REVIEW. YET.</div>
+        <Link to={`/review/${target}`}>
+          <button>REVIEW LATER</button>
+        </Link>
+      </div>
     </div>
   );
 }

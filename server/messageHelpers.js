@@ -15,19 +15,17 @@ const getUserIds = (username, target, cb) => {
 };
 
 // insert a message into the database based off the state of the socket
-const insertMessage = (message, bool, username, target) => {
-  getUserIds(username, target, (userA, userB) => {
-    pool.query(
-      `INSERT INTO message (message_text, visited, from_username, to_username) VALUES ('${message}', '${bool}', '${userA}', '${userB}')`,
-      function(error, results) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("inserted into message", results);
-        }
+const insertMessage = (message, bool, from_username, to_username) => {
+  pool.query(
+    `INSERT INTO message (message_text, visited, from_username, to_username) VALUES ('${message}', '${bool}', '${from_username}', '${to_username}')`,
+    function(error, results) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("inserted into message", results);
       }
-    );
-  });
+    }
+  );
 };
 
 //ensure previously unread messages are marked as visited

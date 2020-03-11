@@ -51,7 +51,7 @@ export default function ChatBox(props) {
   }, []);
 
   const addMessage = (user_id, message) => {
-    dispatch({ type: "add-message", message, id: user_id });
+    dispatch({ type: "add-message", message, user_id });
   };
 
   const addHistory = message => {
@@ -60,7 +60,8 @@ export default function ChatBox(props) {
 
   useEffect(() => {
     const mount = () => {
-      socket.emit("mount", target);
+      console.log(username, target, from_username, to_username);
+      socket.emit("mount", to_username);
       axios
         .post(`${baseURL}chat/history`, {
           username,
@@ -111,8 +112,7 @@ export default function ChatBox(props) {
       <button
         onClick={event => {
           addMessage(user_id, message);
-          console.log(message);
-          socket.emit("private", target, message);
+          socket.emit("private", from_username, to_username, target, message);
         }}
       >
         Send

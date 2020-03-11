@@ -28,10 +28,10 @@ export default function MessageLog(props) {
         uniqueMessenger[current.from_username] = {
           from_username: current.from_username,
           to_username: current.to_username,
-          username: current.username,
           visited: current.visited,
           message_text: current.message_text,
-          message_date: current.message_date
+          message_date: current.message_date,
+          sender: current.sender
         };
       }
     }
@@ -45,16 +45,16 @@ export default function MessageLog(props) {
       render.push(
         <Link
           to={{
-            pathname: `/chatbox/${current.username}`,
+            pathname: `/chatbox/${current.sender}`,
             state: {
-              from_username: current.from_username,
-              to_username: current.to_username
+              from_username: current.to_username,
+              to_username: current.from_username
             }
           }}
         >
           <div className={className} key={i}>
             {" "}
-            Message: {current.message_text} from {current.username} sent on{" "}
+            Message: {current.message_text} from {current.sender} sent on{" "}
             {current.message_date}{" "}
           </div>
         </Link>

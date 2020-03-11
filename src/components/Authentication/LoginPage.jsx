@@ -36,7 +36,7 @@ export default function LoginPage() {
             username: data.data.username,
             user_id: data.data.id
           });
-          socket.emit("login", data.data.username, null);
+          socket.emit("login", data.data.id);
           console.log("logged in");
         })
         // .then(x => {

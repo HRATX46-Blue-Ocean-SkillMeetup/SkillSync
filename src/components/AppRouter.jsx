@@ -16,7 +16,7 @@ import LoginPage from "./Authentication/LoginPage.jsx";
 import SignIn from "./Authentication/SignIn.jsx";
 import ChatBox from "./Authentication/ChatBox.jsx";
 import MessageLog from "./Authentication/MessageLog.jsx";
-
+import ReviewPage from "./ReviewPage.js";
 import NavBar from "./NavBar.jsx";
 import NewPostForm from "./NewPostForm.jsx";
 
@@ -30,7 +30,7 @@ import {
 
 const socketUrl = "http://localhost:3000";
 export const socket = io(socketUrl);
-export const UserState = createContext({ username: "", user_id: 21 });
+export const UserState = createContext({ username: "", user_id: 0 });
 
 const UserStateReducer = (state, action) => {
   switch (action.type) {
@@ -51,18 +51,21 @@ const SwitchPath = (userInfo, dispatchContext) => {
         <Route path="/signup/">
           <SignIn />
         </Route>
-        <Route path="/message/log/">
+        <PrivateRoute path="/message/log/">
           <MessageLog />
-        </Route>
+        </PrivateRoute>
         <Route path="/profile/:username/">
           <UserProfile />
         </Route>
-        <Route path="/newpost/">
+        <PrivateRoute path="/newpost/">
           <NewPostForm />
-        </Route>
-        <Route path={`/chatbox/:target`}>
+        </PrivateRoute>
+        <PrivateRoute path={`/chatbox/:target`}>
           <ChatBox />
-        </Route>
+        </PrivateRoute>
+        <PrivateRoute path={`/review/:target`}>
+          <ReviewPage />
+        </PrivateRoute>
         <Route exact path="/">
           <FrontPage />
         </Route>

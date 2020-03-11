@@ -9,44 +9,42 @@ const socketInit = insertMessage => {
   io.on("connection", socket => {
     console.log("connected to" + socket);
 
-    socket.on("login", (user, target) => {
-      console.log(target);
-      socket.username = user;
-      connectedUsers[user] = {
+    socket.on("login", user_id => {
+      socket.user_id = user_id;
+      connectedUsers[user_id] = {
         socketId: socket.id,
-        username: user,
-        chatroom: target
+        username: user_id,
+        chatroom: null
       };
 
       socket.on("mount", target => {
-        const username = socket.username;
-        connectedUsers[username].chatroom = target;
+        const user_id = socket.user_id;
+        connectedUsers[user_id].chatroom = target;
         console.log("mount", connectedUsers);
       });
 
       socket.on("unmount", () => {
-        const username = socket.username;
-        connectedUsers[username].chatroom = null;
+        const user_id = socket.user_id;
+        connectedUsers[user_id].chatroom = null;
         console.log("unmount", connectedUsers);
       });
 
       console.log(connectedUsers);
 
-      socket.on("private", (target, message) => {
-        const username = socket.username;
-        console.log(username, "username", target, "target");
-        if (connectedUsers[target]) {
-          const { chatroom, socketId } = connectedUsers[target];
-          if (chatroom !== username) {
-            insertMessage(message, false, username, target);
+      socket.on("private", (from_username, to_username, target, message) => {
+        console.log(from_username, "from_username", to_username, "to_username");
+        if (connectedUsers[to_username]) {
+          const { chatroom, socketId } = connectedUsers[to_username];
+          if (chatroom !== from_username) {
+            insertMessage(message, false, from_username, to_username);
             console.log("1: wrong chatroom");
           } else {
             io.to(`${socketId}`).emit("pm", message);
-            insertMessage(message, true, username, target);
+            insertMessage(message, true, from_username, to_username);
             console.log("2: connected to the same chatroom");
           }
         } else {
-          insertMessage(message, false, username, target);
+          insertMessage(message, false, from_username, to_username);
           console.log("3: target user is not connected");
         }
       });

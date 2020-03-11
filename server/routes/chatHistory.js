@@ -24,7 +24,7 @@ const chatLog = (req, res) => {
     `SELECT *, b.username, (SELECT username FROM user WHERE user_id = a.from_username) as sender FROM message a 
 LEFT JOIN user b
 	on a.to_username = b.user_id
-WHERE b.user_id = '${user_id}' ORDER BY visited ASC`,
+WHERE b.user_id = '${user_id}' ORDER BY visited ASC, message_date DESC`,
     function(error, results) {
       if (results) {
         res.status(200).send(results);
