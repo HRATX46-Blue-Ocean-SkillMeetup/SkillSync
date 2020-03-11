@@ -1,8 +1,6 @@
 const postingRoutes = app => {
   app.route("/rating").get((req, res) => {
     let userId = req.query.userId;
-    console.log("userId! ");
-    console.log(userId);
     pool.query(
       `select AVG(rating) as rating from review where user_id = ${userId};`,
       function(error, results) {
@@ -42,6 +40,32 @@ const postingRoutes = app => {
             where posting_id = ${postingId};`,
       function(error, results) {
         res.status(200).send(results[0]);
+      }
+    );
+  });
+
+  app.route("/getMessages").get((req, res) => {
+    let user_id = req.query.user_id;
+    pool.query(
+      `select MIN(m.visited) as visited, m.from_username, MAX(m.message_date) as last_message, u.username, u.user_photo 
+    from message m
+    left join user u on m.from_username = u.user_id
+    where to_username = '${user_id}'
+    group by from_username;`,
+      function(error, results) {
+        res.status(200).send(results);
+      }
+    );
+  });
+
+  app.route("/getMessagesCount").get((req, res) => {
+    let user_id = req.query.user_id;
+    pool.query(
+      `select from_username, count(*) as count from message m
+      where to_username = '${user_id}' and visited = 0
+      group by from_username;`,
+      function(error, results) {
+        res.status(200).send(results);
       }
     );
   });

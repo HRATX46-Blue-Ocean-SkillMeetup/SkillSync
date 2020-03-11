@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import axios from "axios";
 
 import { UserState } from "./AppRouter.jsx";
@@ -12,6 +11,10 @@ function NewPostForm(props) {
   const { userInfo } = context;
   const { user_id } = userInfo;
 
+  // const { userInfo} = useContext(UserState);
+  // const user_id = userInfo.user_id;
+  const user_id = 1;
+
   const handleChange = event => {
     setNewDescription(event.target.value);
   };
@@ -22,7 +25,6 @@ function NewPostForm(props) {
 
   const handleNewPostClick = event => {
     console.log(selectedSkill);
-    console.log(user_id);
     console.log(newDescription);
     axios
       .post("/addPosting", {
@@ -47,25 +49,33 @@ function NewPostForm(props) {
   }, []);
 
   return (
-    <div className="newPostForm">
-      <div className="inputDropdown">
-        <p className="newPostText">What do you want to teach?</p>
-        <select onChange={handleSkillChange}>
-          <option value="">Choose from your skills</option>
-          {skills.map((skill, index) => {
-            return (
-              <option key={index} value={skill.id}>
-                {skill.skill}
-              </option>
-            );
-          })}
-        </select>
+    <div className="posting-mainContainer">
+      <h1 className="posting-header">New Post</h1>
+      <div className="posting-newForm">
+        <div className="posting-inputDropdown">
+          <p className="posting-newPostText">What do you want to teach?</p>
+          <select onChange={handleSkillChange} className="posting-dropdown">
+            <option value="">Choose from your skills</option>
+            {skills.map((skill, index) => {
+              return (
+                <option key={index} value={skill.id}>
+                  {skill.skill}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="posting-inputText">
+          <p className="posting-newPostText">Enter a brief description:</p>
+          <textarea
+            className="posting-newPostDescription"
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <button className="posting-postButton" onClick={handleNewPostClick}>
+          POST
+        </button>
       </div>
-      <div className="inputText">
-        <p className="newPostText">Enter a brief description</p>
-        <textarea onChange={handleChange}></textarea>
-      </div>
-      <button onClick={handleNewPostClick}>POST</button>
     </div>
   );
 }

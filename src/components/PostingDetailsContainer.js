@@ -25,7 +25,7 @@ function PostingDetailsContainer(props) {
   }, []);
 
   return (
-    <div>
+    <div className="posting-bigContainer">
       <div className="posting-postingDetailsContainer">
         <div className="posting-smallContainer">
           <div className="posting-userPhotoPosting">

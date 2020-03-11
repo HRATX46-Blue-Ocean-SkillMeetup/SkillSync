@@ -12,6 +12,7 @@ import NewPostForm from "./NewPostForm";
 import PostingDetailsContainer from "./PostingDetailsContainer";
 import Skills from "./userProfile/Skills";
 import WantSkills from "./userProfile/WantSkills";
+import Messages from "./Messages";
 
 import {
   // BrowserRouter as Router,
@@ -23,7 +24,6 @@ import {
 
 const App = () => {
   const [postingId, setPostingId] = useState(1);
-  const [userId, setUserId] = useState(1);
 
   //submits any input data to the database
   const submit = () => {
@@ -57,7 +57,7 @@ const App = () => {
   // <FrontPage />
 
   //Messages List
-
+  //<Messages />
   //Single Chat
 
   //Log In / Sign up, takes in custom form hooks
@@ -74,7 +74,7 @@ const App = () => {
   //My Bookings
 
   //New Post
-  //<NewPostForm userId={userId} />
+  //<NewPostForm />
 
   //Search Results
 
@@ -93,6 +93,7 @@ const App = () => {
       />
     </div>
   );
+
 };
 
 export default withRouter(App);
