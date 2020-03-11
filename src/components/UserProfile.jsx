@@ -33,8 +33,8 @@ let promises = [
 export default function UserProfile({ userId }) {
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(0);
-  const [mentorSkills, setMentorSkills] = useState(["kill"]);
   const [menteeSkills, setMenteeSkills] = useState(["people"]);
+  const [mentorSkills, setMentorSkills] = useState(["skill"]);
   const target = "g";
 
   useEffect(() => {
