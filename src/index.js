@@ -7,7 +7,7 @@ import { createBrowserHistory } from "history";
 export const history = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={history} >
+  <Router history={history} basename={"https://skillsync.herokuapp.com/"}>
     <AppRouter />
   </Router>,
 
