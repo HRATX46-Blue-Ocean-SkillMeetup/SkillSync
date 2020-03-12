@@ -7,7 +7,7 @@ import { createBrowserHistory } from "history";
 export const history = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={history} basename={"http://localhost:3000/"}>
+  <Router history={history} >
     <AppRouter />
   </Router>,
 
