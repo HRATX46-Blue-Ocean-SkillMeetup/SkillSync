@@ -71,9 +71,9 @@ const SwitchPath = (userInfo, dispatchContext) => {
         <PrivateRoute path="/newpost/">
           <NewPostForm />
         </PrivateRoute>
-        <Route path={`/chatbox/:target`}>
+        <PrivateRoute path={`/chatbox/:target`}>
           <ChatBox />
-        </Route>
+        </PrivateRoute>
         <PrivateRoute path={`/review/:target`}>
           <ReviewPage />
         </PrivateRoute>
