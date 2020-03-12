@@ -42,7 +42,7 @@
 }
 
 .message-self {
-  color: rgb(65, 69, 66);
+  color: #237553;
   background-color: #e0f4fb;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -57,7 +57,7 @@
 }
 
 .message-interlocutor {
-  color: rgb(65, 69, 66);
+  color: #237553;
   background-color: #f0f0f0;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -76,10 +76,43 @@
   height: 1px;
 }
 
+.message-log-container {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  max-height: 500px;
+  background: #444753;
+  border-radius: 5px;
+  /* overflow: auto; */
+  overflow: auto;
+}
+
 .message-not-visited {
-  color: orange;
+  color: #09ed8f;
+  text-align: center;
+  background-color: #e0f4fb;
+  width: 90%;
+  margin-left: 3%;
+  border-radius: 4px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .message-visited {
-  color: pink;
+  color: #237553;
+  text-align: center;
+  background-color: #e0f4fb;
+  width: 90%;
+  margin-left: 3%;
+  border-radius: 4px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }

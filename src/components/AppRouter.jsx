@@ -41,7 +41,7 @@ const UserStateReducer = (state, action) => {
     case "set-user":
       return { ...state, username: action.username, user_id: action.user_id };
     case "notification":
-      return { ...state, notification: true };
+      return { ...state, notification: action.bool };
     case "logout":
       return { ...state, username: "", user_id: 0 };
     default:
@@ -89,12 +89,12 @@ const AppRouter = () => {
   );
 
   useEffect(() => {
-    socket.on("notification", addNotification);
+    socket.on("notification", addNotification.bind(null, true));
   }, []);
 
-  const addNotification = from_username => {
-    console.log("addNotification ran", from_username);
-    dispatchContext({ type: "notification", user: "test" });
+  const addNotification = bool => {
+    console.log("addNotification ran", bool);
+    dispatchContext({ type: "notification", bool });
   };
 
   if (!userInfo.username.length) {
