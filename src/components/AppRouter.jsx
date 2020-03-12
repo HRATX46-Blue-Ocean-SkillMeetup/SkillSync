@@ -37,12 +37,13 @@ export const UserState = createContext({
 });
 
 const UserStateReducer = (state, action) => {
-  console.log(state["newMessage"]);
   switch (action.type) {
     case "set-user":
       return { ...state, username: action.username, user_id: action.user_id };
     case "notification":
       return { ...state, notification: true };
+    case "logout":
+      return { ...state, username: "", user_id: 0 };
     default:
       return state;
   }
@@ -67,9 +68,9 @@ const SwitchPath = (userInfo, dispatchContext) => {
         <PrivateRoute path="/newpost/">
           <NewPostForm />
         </PrivateRoute>
-        <PrivateRoute path={`/chatbox/:target`}>
+        <Route path={`/chatbox/:target`}>
           <ChatBox />
-        </PrivateRoute>
+        </Route>
         <PrivateRoute path={`/review/:target`}>
           <ReviewPage />
         </PrivateRoute>
@@ -133,9 +134,13 @@ const AppRouter = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li
+              onClick={() => {
+                dispatchContext({ type: "logout" });
+                socket.emit("logout", userInfo.user_id);
+              }}
+            >
               Log Out
-              {/* <Link to="/logout/">Log Out</Link> */}
             </li>
           </ul>
         </nav>

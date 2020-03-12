@@ -101,25 +101,31 @@ export default function ChatBox(props) {
   }
 
   return (
-    <div>
-      <div>{target}</div>
-      <InputField
-        forid="Message"
-        type="text"
-        value={message}
-        setValue={setMessage}
-      />
-      <button
-        onClick={event => {
-          addMessage(user_id, message);
-          socket.emit("private", from_username, to_username, target, message);
-        }}
-      >
-        Send
-      </button>
+    <div className="message-chatbox-page">
       <div className="message-chatbox">
         {displayChat}
         <div id="anchor"></div>
+      </div>
+
+      <div className="message-message-field">
+        <input
+          className="message-text-field"
+          placeholder="your message here"
+          type="text"
+          value={message}
+          onChange={event => {
+            setMessage(event.target.value);
+          }}
+        ></input>
+        <button
+          className="message-message-button"
+          onClick={event => {
+            addMessage(user_id, message);
+            socket.emit("private", from_username, to_username, target, message);
+          }}
+        >
+          Send
+        </button>
       </div>
     </div>
   );
