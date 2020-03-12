@@ -3,7 +3,7 @@ import axios from "axios";
 
 import InputField from "./InputField.jsx";
 
-export default function SignIn(props) {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -12,15 +12,8 @@ export default function SignIn(props) {
   const [user_photo, setUser_photo] = useState("");
 
   const submitForm = () => {
-    const state = [email, password, username, location, bio, user_photo];
-    const setState = [
-      setEmail,
-      setPassword,
-      setUsername,
-      setLocation,
-      setBio,
-      setUser_photo
-    ];
+    const state = [email, password, username, location, bio];
+    const setState = [setEmail, setPassword, setUsername, setLocation, setBio];
     let bool = true;
     for (let i = 0; i < state.length; i++) {
       if (!state[i].length) {
@@ -52,39 +45,46 @@ export default function SignIn(props) {
   };
 
   return (
-    <div>
-      <InputField forid="email" type="text" value={email} setValue={setEmail} />
-      <br />
-      <InputField
-        forid="password"
-        type="password"
-        value={password}
-        setValue={setPassword}
-      />
-      <br />
-      <InputField
-        forid="username"
-        type="text"
-        value={username}
-        setValue={setUsername}
-      />
-      <br />
-      <InputField
-        forid="location"
-        type="text"
-        value={location}
-        setValue={setLocation}
-      />
-      <br />
-      <InputField forid="bio" type="text" value={bio} setValue={setBio} />
-      <br />
-      <InputField
-        forid="user_photo"
-        type="text"
-        value={user_photo}
-        setValue={setUser_photo}
-      />
-      <button onClick={submitForm}> Sign Up </button>
+    <div className="signup">
+      <div className="logoContainer">
+        <img src="../../imgs/logos/SkillSync.png" />
+      </div>
+      <div className="login-container">
+        <InputField
+          forid="email"
+          type="text"
+          value={email}
+          setValue={setEmail}
+        />
+        <InputField
+          forid="password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+        />
+        <InputField
+          forid="username"
+          type="text"
+          value={username}
+          setValue={setUsername}
+        />
+        <InputField
+          forid="location"
+          type="text"
+          value={location}
+          setValue={setLocation}
+        />
+        <InputField forid="bio" type="textarea" value={bio} setValue={setBio} />
+        {/* <InputField
+          forid="user_photo"
+          type="text"
+          value={user_photo}
+          setValue={setUser_photo}
+        /> */}
+        <div className="posting-buttonContainer">
+          <button onClick={submitForm}> Sign Up </button>
+        </div>
+      </div>
     </div>
   );
 }
