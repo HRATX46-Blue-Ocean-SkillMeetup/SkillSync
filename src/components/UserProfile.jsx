@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 
 import axios from "axios";
@@ -10,29 +10,32 @@ import WantSkills from "./userProfile/WantSkills";
 //import ReviewsList from "./ReviewsList";
 import StarRating from "react-star-ratings";
 
-export default function UserProfile({ otherUserId }) {
+export default function UserProfile() {
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(5);
   const [mentorSkills, setMentorSkills] = useState(["ReactJS"]);
   const [menteeSkills, setMenteeSkills] = useState(["Barbecuing"]);
   const target = "g";
 
+  const location = useLocation();
+  const { to_username } = location.state;
+
   useEffect(() => {
     axios
       .all([
         axios.get(`http://localhost:3000/getUserProfile`, {
           params: {
-            ID: otherUserId
+            ID: to_username
           }
         }),
         axios.get("http://localhost:3000/getMentorSkills", {
           params: {
-            ID: otherUserId
+            ID: to_username
           }
         }),
         axios.get("http://localhost:3000/getMenteeSkills", {
           params: {
-            ID: otherUserId
+            ID: to_username
           }
         })
       ])
@@ -64,19 +67,25 @@ export default function UserProfile({ otherUserId }) {
           </span>
           <span className="userBio">
             <span className="userFullName">{userInfo.username}</span> <br />
-            <div className="zip">{userInfo.location}</div>
+            <div className="location">
+              <span>
+                <i className="fas fa-map-marker-alt"></i>
+              </span>
+              <span className="city-state">{`${userInfo.city}, ${userInfo.state}`}</span>
+            </div>
             <div className="bio">{userInfo.bio}</div> <br />
           </span>
         </div>
       </div>
       <div className="profileContact">
-        <button>REQUEST</button>
-        <Link to={`/chatbox/${target}`}>Send Message</Link>
+        <Link to={`/chatbox/${target}`}>
+          <button>Send Message</button>
+        </Link>
       </div>
       <div className="skillsTeachContainer, clearBackground">
         <Skills mentorSkills={mentorSkills} />
         <WantSkills menteeSkills={menteeSkills} />
-        {/*<Reviews /> */}
+        {/* <Reviews /> */}
         {/* <ReviewsList /> */}
         <div className="profileSectionTitle">REVIEWS</div>
         <div className="reviewsContainer">YOU CAN'T ADD A REVIEW. YET.</div>

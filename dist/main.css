@@ -19,6 +19,9 @@ body {
   font-size: 24px;
   margin: 0;
 }
+a {
+  text-decoration: none;
+}
 .logoContainer {
   display: flex;
   justify-content: center;
@@ -29,7 +32,6 @@ body {
 .clearBackground {
   background: #e5e5e5;
   mix-blend-mode: normal;
-  opacity: 0.4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   z-index: -1;
@@ -42,7 +44,7 @@ body {
   width: 190px;
   height: 39px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 5;
+  z-index: 3;
 }
 
 .inputText {
@@ -181,8 +183,10 @@ input#bio {
   float: right;
 }
 /* User Profile */
-.profileRow1 {
-
+.location {
+  display: flex;
+  align-items: center;
+  margin: 3% 0 0 3%;
 }
 /* top bar */
 .notificationDot:before {
@@ -324,7 +328,7 @@ hr {
   margin-top: 5px;
   height: 90%;
   width: 55%;
-  background: #F0F0F0;
+  background: #f0f0f0;
   border-radius: 4px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -332,22 +336,26 @@ hr {
   font-weight: 200;
   color: #656565;
   box-sizing: border-box;
+  margin-right: 5px;
 }
 .skillsTeachContainer {
   display: flex;
   align-content: center;
 }
 .userProfile-image {
-  min-width: 150px;
+  max-width: 150px;
   height: 100%;
+  border-radius: 5px;
 }
 .userFullName {
   font-size: 30px;
   padding-left: 4px;
+  color: #237553;
 }
-.zip {
+.city-state {
   font-size: 20px;
   padding-left: 4px;
+  color: #98c460;
 }
 .bio {
   font-size: 14px;
@@ -362,7 +370,6 @@ hr {
   width: 154px;
   height: 110px;
   margin: 5px;
-  border: 2px solid #FFFFFF;
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -407,14 +414,14 @@ hr {
 .userProfile-skill {
   display: flex;
   flex-direction: row;
-  width: 80px;
+  width: auto;
   height: 40px;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 1px;
+  padding: 5px;
   margin: 10px;
-  background: #FFFFFF;
+  background: #ffffff;
   font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
@@ -465,7 +472,7 @@ hr {
   border-radius: 4px;
   padding: 1px;
   margin: 10px;
-  background: #FFFFFF;
+  background: #ffffff;
   font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
@@ -480,6 +487,9 @@ hr {
   justify-content: space-around;
   height: 40px;
   width: 150px;
+  margin: 0 0 5% 2%;
+  color: #60c3ab;
+  font-size: 18px;
 }
 .reviewsListContainer {
   display: flex;
