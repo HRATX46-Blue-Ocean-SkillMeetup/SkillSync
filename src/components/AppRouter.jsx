@@ -22,7 +22,7 @@ import PostingDetailsContainer from "./PostingDetailsContainer";
 import { Switch, Route, withRouter } from "react-router-dom";
 import PostingList from "./PostingList.js";
 
-const socketUrl = "https://skillsync.herokuapp.com";
+const socketUrl = "https://skillsync.herokuapp.com/";
 export const socket = io(socketUrl);
 export const UserState = createContext({
   username: "",
