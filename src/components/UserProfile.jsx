@@ -1,96 +1,103 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 
 import axios from "axios";
+import Skills from "./userProfile/Skills";
+import WantSkills from "./userProfile/WantSkills";
+//import Reviews from "./Reviews";
+//import ReviewsList from "./ReviewsList";
+import StarRating from "react-star-ratings";
+import { UserState } from "./AppRouter.jsx";
 
-import ChatBox from "./Authentication/ChatBox.jsx";
-
-let promises = [
-  axios.get(`http://localhost:3000/getUserProfile`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get(`http://localhost:3000/getAverageReviews`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMentorSkills", {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMenteeSkills", {
-    params: {
-      ID: 3
-    }
-  })
-];
-
-export default function UserProfile({ userId }) {
+export default function UserProfile() {
   const [userInfo, setUserInfo] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [menteeSkills, setMenteeSkills] = useState(["people"]);
-  const [mentorSkills, setMentorSkills] = useState(["skill"]);
-  const target = "g";
+  const [rating, setRating] = useState(5);
+  const [mentorSkills, setMentorSkills] = useState(["ReactJS"]);
+  const [menteeSkills, setMenteeSkills] = useState(["Barbecuing"]);
+  const { username } = useParams();
+
+  const context = useContext(UserState);
+  const user_id = context.userInfo.user_id;
+  // const location = useLocation();
+  // const { to_username } = location.state;
 
   useEffect(() => {
     axios
-      .all(promises)
-      .then(responseArray => {
-        setUserInfo(responseArray[0].data[0]);
-        setRating(5.0);
-        setMentorSkills(responseArray[2].data);
-        setMenteeSkills(responseArray[3].data);
+      .get(`/getUserProfile`, {
+        params: {
+          ID: username
+        }
+      })
+      .then(({ data }) => {
+        setUserInfo(data[0]);
+        const newRating = data[0] ? data[0].rating : 5.0;
+        setRating(newRating);
+        const mentorSkills = [];
+        const menteeSkills = [];
+        data.forEach(skill => {
+          if (skill.role === "mentor") {
+            mentorSkills.push(skill);
+          } else {
+            menteeSkills.push(skill);
+          }
+        });
+        setMentorSkills(mentorSkills);
+        setMenteeSkills(menteeSkills);
       })
       .catch(err => {
         console.error("request failed");
       });
   }, []);
-
   return (
     <div className="profileContainer">
       <div className="profileUserInfo">
         <div className="profileRow1">
           <span className="userPhotoProfile">
-            <img src={userInfo.user_photo} width="140" />
+            <img className="userProfile-image" src={userInfo.user_photo} />
+            <StarRating
+              rating={rating}
+              starRatedColor="#FF8C5B"
+              name="rating"
+              starDimension="25px"
+              starSpacing="1px"
+            />
             <br />
-            <span className="Rating">{rating} &#9733;</span> <br />
           </span>
           <span className="userBio">
             <span className="userFullName">{userInfo.username}</span> <br />
-            ZIP Code: {userInfo.location} <br />
-            Bio: {userInfo.bio} <br />
+            <div className="location">
+              <span>
+                <i className="fas fa-map-marker-alt"></i>
+              </span>
+              <span className="city-state">{`${userInfo.city}, ${userInfo.state}`}</span>
+            </div>
+            <div className="bio">{userInfo.bio}</div> <br />
           </span>
         </div>
       </div>
       <div className="profileContact">
-        <button>REQUEST</button>
-        <Link to={`/chatbox/${target}`}>Send Message</Link>
+        <Link
+          to={{
+            pathname: `/chatbox/${username}`,
+            state: {
+              from_username: user_id,
+              to_username: username
+            }
+          }}
+        >
+          <button>Send Message</button>
+        </Link>
       </div>
       <div className="skillsTeachContainer, clearBackground">
-        <div className="profileSectionTitle">SKILLS I TEACH</div>
-        <div className="skills">
-          {mentorSkills.map(skill => (
-            <div key={skill.skill}>{skill.skill}</div>
-          ))}
-        </div>
-      </div>
-      <div className="skillsLearnContainer, clearBackground">
-        <div className="profileSectionTitle">I WANT TO LEARN</div>
-        <div className="skills">
-          {menteeSkills.map(skills => (
-            <div key={skills.skill}>{skills.skill}</div>
-          ))}
-        </div>
-      </div>
-      <div className="reviewsContainer">
+        <Skills mentorSkills={mentorSkills} />
+        <WantSkills menteeSkills={menteeSkills} />
+        {/* <Reviews /> */}
+        {/* <ReviewsList /> */}
         <div className="profileSectionTitle">REVIEWS</div>
         <div className="reviewsContainer">YOU CAN'T ADD A REVIEW. YET.</div>
-        <Link to={`/review/${target}`}>
+        <Link to={`/review/${username}`}>
           <button>REVIEW LATER</button>
         </Link>
       </div>

@@ -19,6 +19,9 @@ body {
   font-size: 24px;
   margin: 0;
 }
+a {
+  text-decoration: none;
+}
 .logoContainer {
   display: flex;
   justify-content: center;
@@ -29,21 +32,20 @@ body {
 .clearBackground {
   background: #e5e5e5;
   mix-blend-mode: normal;
-  opacity: 0.4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   z-index: -1;
 }
-/* button {
+.login-container button {
   font-family: Roboto;
   font-size: 24px;
-  background: #F0F0F0;
+  background: #f0f0f0;
   border-radius: 4px;
   width: 190px;
   height: 39px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 5;
-} */
+  z-index: 3;
+}
 
 .inputText {
   width: 50%;
@@ -60,6 +62,45 @@ body {
   font-style: italic;
   font-size: 18px;
   padding-left: 5px;
+}
+.login {
+  margin: 20vh 10%;
+}
+.signup {
+  margin: 5% 10%;
+}
+.login-container {
+  display: grid;
+  margin-top: 20px;
+}
+.login-field {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+input#username,
+input#password,
+input#email,
+input#location,
+input#bio,
+input#user_photo {
+  height: 40px;
+  padding: 3px 7px;
+  font: inherit;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid #a6a6a6;
+  border-top-color: #949494;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 0 rgba(0, 0, 0, 0.07) inset;
+  outline: 0;
+}
+input#bio {
+  height: 100px;
+}
+.mb-1 {
+  margin-bottom: 5%;
 }
 
 /* Front Page */
@@ -80,7 +121,7 @@ body {
 }
 .homeQuoteContainer {
   padding: 20px;
-  margin: 15px;
+  margin: 30px 15px 15px 15px;
   background: #e0f4fb;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -117,8 +158,8 @@ body {
   background-repeat: no-repeat;
 }
 .categoryIconList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 .categoryIconList .categorySquare {
   flex: 0 46%;
@@ -142,31 +183,11 @@ body {
   float: right;
 }
 /* User Profile */
-.profileRow1 {
+.location {
+  display: flex;
+  align-items: center;
+  margin: 3% 0 0 3%;
 }
-.userPhotoProfile {
-  position: absolute;
-  width: 140px;
-  height: 130px;
-  left: calc(50% - 140px / 2 - 129px);
-  top: 79px;
-
-  /* background: url(photo-1551861568-c0afa6653bc1.jpg), url(photo-1551861568-c0afa6653bc1.jpg); */
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-}
-.userBio {
-  position: absolute;
-  width: 253px;
-  height: 170px;
-  /* left: calc(50% - 253px/2 + 73.5px); */
-  /* top: 79px; */
-  background: #f0f0f0;
-  border-radius: 4px;
-}
-
 /* top bar */
 .notificationDot:before {
   content: " \25CF";
@@ -199,8 +220,12 @@ body {
   background: #ffffff;
   width: 100%;
   padding: 0 2%;
-  position: absolute;
-  top: 8%;
+  position: relative;
+  top: -1px;
+  z-index: 5;
+}
+.navDrawer a {
+  text-decoration: none;
 }
 .navLink:hover {
   color: #38755d;
@@ -283,7 +308,77 @@ hr {
 }
 
 /* james */
-
+/* ---------- james*/
+.profileUserInfo {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.profileRow1 {
+  display: flex;
+  flex-direction: row;
+}
+.profileRow1 {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.userBio {
+  position: right;
+  margin-top: 5px;
+  height: 90%;
+  width: 55%;
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 200;
+  color: #656565;
+  box-sizing: border-box;
+  margin-right: 5px;
+}
+.skillsTeachContainer {
+  display: flex;
+  align-content: center;
+}
+.userProfile-image {
+  max-width: 150px;
+  height: 100%;
+  border-radius: 5px;
+}
+.userFullName {
+  font-size: 30px;
+  padding-left: 4px;
+  color: #237553;
+}
+.city-state {
+  font-size: 20px;
+  padding-left: 4px;
+  color: #98c460;
+}
+.bio {
+  font-size: 14px;
+  padding-top: 12px;
+  padding-left: 4px;
+}
+.star-ratings {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+.userPhotoProfile {
+  width: 154px;
+  height: 110px;
+  margin: 5px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  position: relative;
+}
+.profileContact {
+  display: flex;
+  border-radius: 4px;
+}
 .userProfile-skills-container {
   display: flex;
   width: 100%;
@@ -292,19 +387,17 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-
 .userProfile-skills {
   display: flex;
-
   width: 98%;
-  height: 100px;
+  height: 30px;
   background: #237553;
   color: white;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 1px;
-  font-family: Roboto;
+  margin: 10px;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
@@ -314,7 +407,6 @@ hr {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-overSkill {
   display: flex;
   flex-direction: row;
@@ -322,15 +414,15 @@ hr {
 .userProfile-skill {
   display: flex;
   flex-direction: row;
-  width: 80px;
+  width: auto;
   height: 40px;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 1px;
+  padding: 5px;
   margin: 10px;
   background: #ffffff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
   font-size: 18px;
@@ -338,12 +430,10 @@ hr {
   text-align: center;
   color: #656565;
 }
-
 .userProfile-overLearn {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-want-to-learn-container {
   display: flex;
   width: 100%;
@@ -352,29 +442,26 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-
 .userProfile-want-to-learn {
   display: flex;
   width: 98%;
-  height: 100px;
+  height: 30px;
   background: #237553;
   color: white;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   margin: 10px;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
   line-height: 100%;
 }
-
 .userProfile-learn-skill-container {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-learn-skill {
   display: flex;
   flex-direction: row;
@@ -386,12 +473,53 @@ hr {
   padding: 1px;
   margin: 10px;
   background: #ffffff;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
   font-size: 18px;
   line-height: 100%;
   text-align: center;
   color: #656565;
+}
+.profileContact button {
+  display: flex;
+  background-color: white;
+  justify-content: space-around;
+  height: 40px;
+  width: 150px;
+  margin: 0 0 5% 2%;
+  color: #60c3ab;
+  font-size: 18px;
+}
+.reviewsListContainer {
+  display: flex;
+  flex-direction: column;
+}
+.reviewBox {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  margin-top: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  height: 100px;
+  /* background-color: #F0F0F0; */
+  background-color: black;
+}
+.starRatingReviews {
+  display: flex;
+  flex-direction: row;
+}
+.textReviewsList {
+  display: flex;
+  flex-direction: row;
+}
+.photoReviewsList {
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  width: 70px;
+  border-radius: 4px;
+  background: url(woman-yellow-shirt-smiling-1296x728.jpg);
 }
 /* ---------- james*/

@@ -1,46 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
-export default function LearnSkill() {
-  const [menteeSkill, setMenteeSkill] = useState([]);
-  const [mentorSkill, setMentorSkill] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("/getSkills", {
-        params: {
-          ID: 20
-        }
-      })
-      .then(function(response) {
-        const menteeSkill = [];
-        const mentorSkill = [];
-        response.data.forEach(skill => {
-          if (skill.role === "mentee") {
-            mentorSkill.push(skill.skill);
-          } else {
-            menteeSkill.push(skill.skill);
-          }
-        });
-        setMenteeSkill(menteeSkill);
-        setMentorSkill(mentorSkill);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }, []);
-  console.log(mentorSkill);
-  console.log(menteeSkill);
-
-  const testArray = ["one", "two", "three", "four"];
+export default function LearnSkill({ menteeSkills }) {
   return (
     <div>
       <div className="userProfile-overLearn">
-        {menteeSkill.map(x => (
-          <li className="userProfile-learn-skill">{x}</li>
+        {menteeSkills.map((x, index) => (
+          <li className="userProfile-learn-skill" key={index}>{x.skill}</li>
         ))}
       </div>
     </div>
   );
 }
-//

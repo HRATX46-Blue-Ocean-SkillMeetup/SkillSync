@@ -50,23 +50,30 @@ export default function LoginPage() {
     }
   };
   return (
-    <div>
-      <InputField
-        forid="username"
-        type="text"
-        value={username}
-        setValue={setUsername}
-      />
-      <br />
-      <InputField
-        forid="password"
-        type="password"
-        value={password}
-        setValue={setPassword}
-      />
-      <button onClick={submitLogIn}>Log In </button>
-      <br />
-      <button>Sign Up </button>
+    <div className="login">
+      <div className="logoContainer">
+        <img src="../../imgs/logos/SkillSync.png" />
+      </div>
+      <div className="login-container">
+        <InputField
+          forid="username"
+          type="text"
+          value={username}
+          setValue={setUsername}
+        />
+        <InputField
+          forid="password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+        />
+        <div className="posting-buttonContainer">
+          <button onClick={submitLogIn} className="mb-1">
+            Log In{" "}
+          </button>
+          <button className="mb-1">Sign Up </button>
+        </div>
+      </div>
     </div>
   );
 }

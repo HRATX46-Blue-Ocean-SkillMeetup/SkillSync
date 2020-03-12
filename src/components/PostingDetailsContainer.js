@@ -1,50 +1,70 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import Location from "./Location.js";
 import Rating from "./Rating.js";
+import { Link, useLocation } from "react-router-dom";
+import { UserState } from "./AppRouter.jsx";
 
-function PostingDetailsContainer(props) {
-  const [photo, setPhoto] = useState("");
-  const [activity, setActivity] = useState("");
-  const [mentor, setMentor] = useState("");
-  const [postingDescription, setPostingDescription] = useState(
-    "Fugit excepturi et corporis autem possimus. Aut qui minima aliquam dicta eos. Est consequatur aut adipisci iure qui."
-  );
-  const [location, setLocation] = useState("");
-  const [rating, setRating] = useState();
-
-  useEffect(() => {
-    axios.get(`/postingData/${props.postingId}`).then(function(response) {
-      setPhoto(response.data.user_photo);
-      setActivity(response.data.skill);
-      setMentor(response.data.username);
-      setPostingDescription(response.data.description);
-      setLocation(response.data.location);
-      setRating(response.data.rating);
-    });
-  }, []);
+function PostingDetailsContainer() {
+  const location = useLocation();
+  const { posting } = location.state;
+  const { skill, rating, user_photo, username, description } = posting;
+  const context = useContext(UserState);
+  const { userInfo } = context;
+  const { user_id } = userInfo;
 
   return (
     <div className="posting-bigContainer">
       <div className="posting-postingDetailsContainer">
         <div className="posting-smallContainer">
-          <div className="posting-userPhotoPosting">
-            <img src={photo} alt="" className="posting-image" />
-          </div>
+          <Link
+            to={{
+              pathname: `/profile/${username}`,
+              state: {
+                to_username: posting.user_id
+              }
+            }}
+          >
+            <div className="posting-userPhotoPosting">
+              <img src={user_photo} alt="" className="posting-image" />
+            </div>
+          </Link>
           <div>
-            <p className="posting-title">
-              <strong>{activity} </strong>lesson with {mentor}
-            </p>
-            <Location location={location} />
-            <Rating rating={rating} />
+            <Link
+              to={{
+                pathname: `/profile/${username}`,
+                state: {
+                  to_username: posting.user_id
+                }
+              }}
+            >
+              <div className="posting-title-container">
+                <p className="posting-title">
+                  <strong>{skill} </strong>lesson with {username}
+                </p>
+              </div>
+            </Link>
+            <Location city={posting.city} state={posting.state} />
+            <Rating rating={rating || 0} />
           </div>
         </div>
         <div>
-          <p className="posting-postingDescription">{postingDescription}</p>
+          <p className="posting-postingDescription">
+            {description ? description : "Ready to learn?"}
+          </p>
         </div>
       </div>
       <div className="posting-buttonContainer">
-        <button className="posting-button">MESSAGE</button>
+        <Link
+          to={{
+            pathname: `/chatbox/${username}`,
+            state: {
+              from_username: user_id,
+              to_username: posting.user_id
+            }
+          }}
+        >
+          <button className="posting-button">MESSAGE</button>
+        </Link>
       </div>
     </div>
   );
