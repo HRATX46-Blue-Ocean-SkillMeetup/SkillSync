@@ -2,8 +2,13 @@ import React from "react";
 import NotificationDot from "./NotificationDot.jsx";
 import { Link } from "react-router-dom";
 
-const NavDrawer = ({ dot, showNavDrawer, loggedIn, handleNavDrawerClick, userInfo }) => {
-
+const NavDrawer = ({
+  dot,
+  showNavDrawer,
+  loggedIn,
+  handleNavDrawerClick,
+  userInfo
+}) => {
   if (!loggedIn) {
     return (
       <div
@@ -42,7 +47,10 @@ const NavDrawer = ({ dot, showNavDrawer, loggedIn, handleNavDrawerClick, userInf
           <span className="navLink">NEW POSTING</span>
         </Link>
         <hr color="#98C460" />
-        <Link to={`/profile/${userInfo.username}/`} onClick={handleNavDrawerClick}>
+        <Link
+          to={`/profile/${userInfo.username}/`}
+          onClick={handleNavDrawerClick}
+        >
           <span className="navLink">MY PROFILE</span>
         </Link>
         <hr color="#98C460" />
