@@ -7,6 +7,8 @@ const {
 } = require("./socket");
 const path = require("path");
 const port = process.env.PORT || 3000;
+const cors = require("cors");
+app.use(cors());
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
