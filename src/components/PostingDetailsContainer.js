@@ -43,8 +43,8 @@ function PostingDetailsContainer() {
                 </p>
               </div>
             </Link>
-            <Location location={posting.location} />
-            <Rating rating={rating} />
+            <Location city={posting.city} state={posting.state} />
+            <Rating rating={rating || 0} />
           </div>
         </div>
         <div>

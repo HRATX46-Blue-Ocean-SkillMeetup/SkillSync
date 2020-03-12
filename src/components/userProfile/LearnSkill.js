@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 export default function LearnSkill({ menteeSkills }) {
   return (
     <div>
       <div className="userProfile-overLearn">
-        {menteeSkills.map(x => (
-          <li className="userProfile-learn-skill">{x.skill}</li>
+        {menteeSkills.map((x, index) => (
+          <li className="userProfile-learn-skill" key={index}>{x.skill}</li>
         ))}
       </div>
     </div>
