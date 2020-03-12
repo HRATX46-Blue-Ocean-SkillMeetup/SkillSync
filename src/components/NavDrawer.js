@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import NotificationDot from "./NotificationDot.jsx";
 import { Link } from "react-router-dom";
+import { socket } from "./AppRouter.jsx";
 
 const NavDrawer = ({
   dot,
   showNavDrawer,
   loggedIn,
   handleNavDrawerClick,
-  userInfo
+  userInfo,
+  dispatchContext
 }) => {
+  const handleLogout = () => {
+    dispatchContext({ type: "logout" });
+    socket.emit("logout", userInfo.user_id);
+  };
   if (!loggedIn) {
     return (
       <div
@@ -57,6 +63,12 @@ const NavDrawer = ({
         <Link to="/">
           <span className="navLink" onClick={handleNavDrawerClick}>
             HOME
+          </span>
+        </Link>
+        <hr color="#98C460" />
+        <Link to="/">
+          <span className="navLink" onClick={handleLogout}>
+            LOGOUT
           </span>
         </Link>
         <hr color="#98C460" />

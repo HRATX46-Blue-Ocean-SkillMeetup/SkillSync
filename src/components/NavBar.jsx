@@ -3,7 +3,13 @@ import NotificationDot from "./NotificationDot.jsx";
 import Search from "./Search";
 import NavDrawer from "./NavDrawer";
 
-export default function NavBar({ dot, handleSelectPost, loggedIn, userInfo }) {
+export default function NavBar({
+  dot,
+  handleSelectPost,
+  loggedIn,
+  userInfo,
+  dispatchContext
+}) {
   const [showNavDrawer, setShowNavDrawer] = useState(false);
 
   const handleNavDrawerClick = () => {
@@ -21,6 +27,7 @@ export default function NavBar({ dot, handleSelectPost, loggedIn, userInfo }) {
         loggedIn={loggedIn}
         handleNavDrawerClick={handleNavDrawerClick}
         userInfo={userInfo}
+        dispatchContext={dispatchContext}
       />
     </div>
   );

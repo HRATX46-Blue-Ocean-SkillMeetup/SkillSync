@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import { Link, useRouteMatch } from "react-router-dom";
-import { PrivateRoute } from "./PrivateRoute.jsx";
-import ChatBox from "./ChatBox.jsx";
 
 import { UserState } from "../AppRouter.jsx";
 
 export default function MessageLog(props) {
   const context = useContext(UserState);
-  const { userInfo } = context;
+  const { userInfo, dispatchContext } = context;
   const { user_id } = userInfo;
   console.log(user_id);
 
@@ -48,7 +46,7 @@ export default function MessageLog(props) {
         >
           <div className={className} key={i}>
             {" "}
-            Message: {current.message_text} from {current.sender} sent on{" "}
+            {current.message_text} sent by {current.sender} latest message on{" "}
             {current.message_date}{" "}
           </div>
         </Link>
@@ -58,6 +56,7 @@ export default function MessageLog(props) {
   };
 
   useEffect(() => {
+    dispatchContext({ type: "notification", bool: false });
     axios
       .post("/chat/log", {
         user_id
@@ -72,7 +71,7 @@ export default function MessageLog(props) {
   }, []);
 
   return (
-    <div>
+    <div className="message-log-container">
       <div className="message-log">{generateMessageArray()}</div>
     </div>
   );

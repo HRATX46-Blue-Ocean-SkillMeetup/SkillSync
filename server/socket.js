@@ -50,6 +50,12 @@ const socketInit = insertMessage => {
         }
       });
 
+      socket.on("logout", user_id => {
+        console.log(connectedUsers);
+        delete connectedUsers[user_id];
+        console.log("no user here", connectedUsers);
+      });
+
       // message_text TEXT,
       // visited BOOLEAN,
       // from_username INT NOT NULL,

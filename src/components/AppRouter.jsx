@@ -22,7 +22,7 @@ import PostingDetailsContainer from "./PostingDetailsContainer";
 import { Switch, Route, withRouter } from "react-router-dom";
 import PostingList from "./PostingList.js";
 
-const socketUrl = "http://localhost:3000";
+const socketUrl = "https://skillsync.herokuapp.com";
 export const socket = io(socketUrl);
 export const UserState = createContext({
   username: "",
@@ -31,12 +31,13 @@ export const UserState = createContext({
 });
 
 const UserStateReducer = (state, action) => {
-  console.log(state["newMessage"]);
   switch (action.type) {
     case "set-user":
       return { ...state, username: action.username, user_id: action.user_id };
     case "notification":
-      return { ...state, notification: true };
+      return { ...state, notification: action.bool };
+    case "logout":
+      return { ...state, username: "", user_id: 0 };
     default:
       return state;
   }
@@ -70,9 +71,9 @@ const SwitchPath = (userInfo, dispatchContext) => {
         <PrivateRoute path="/newpost/">
           <NewPostForm />
         </PrivateRoute>
-        <PrivateRoute path={`/chatbox/:target`}>
+        <Route path={`/chatbox/:target`}>
           <ChatBox />
-        </PrivateRoute>
+        </Route>
         <PrivateRoute path={`/review/:target`}>
           <ReviewPage />
         </PrivateRoute>
@@ -91,21 +92,24 @@ const AppRouter = () => {
   );
 
   useEffect(() => {
-    socket.on("notification", addNotification);
+    socket.on("notification", addNotification.bind(null, true));
   }, []);
 
-  const addNotification = from_username => {
-    console.log("addNotification ran", from_username);
-    dispatchContext({ type: "notification", user: "test" });
+  const addNotification = bool => {
+    console.log("addNotification ran", bool);
+    dispatchContext({ type: "notification", bool });
   };
 
   return (
     <div>
-      <NavBar loggedIn={userInfo.username.length} userInfo={userInfo} />
+      <NavBar
+        loggedIn={userInfo.username.length}
+        userInfo={userInfo}
+        dispatchContext={dispatchContext}
+      />
       {SwitchPath(userInfo, dispatchContext)}
     </div>
   );
 };
 
 export default withRouter(AppRouter);
-
