@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 
 import axios from "axios";
@@ -9,42 +9,42 @@ import WantSkills from "./userProfile/WantSkills";
 //import Reviews from "./Reviews";
 //import ReviewsList from "./ReviewsList";
 import StarRating from "react-star-ratings";
+import { UserState } from "./AppRouter.jsx";
 
 export default function UserProfile() {
   const [userInfo, setUserInfo] = useState(0);
   const [rating, setRating] = useState(5);
   const [mentorSkills, setMentorSkills] = useState(["ReactJS"]);
   const [menteeSkills, setMenteeSkills] = useState(["Barbecuing"]);
-  const target = "g";
+  const { username } = useParams();
 
-  const location = useLocation();
-  const { to_username } = location.state;
+  const context = useContext(UserState);
+  const user_id = context.userInfo.user_id;
+  // const location = useLocation();
+  // const { to_username } = location.state;
 
   useEffect(() => {
     axios
-      .all([
-        axios.get(`http://localhost:3000/getUserProfile`, {
-          params: {
-            ID: to_username
-          }
-        }),
-        axios.get("http://localhost:3000/getMentorSkills", {
-          params: {
-            ID: to_username
-          }
-        }),
-        axios.get("http://localhost:3000/getMenteeSkills", {
-          params: {
-            ID: to_username
-          }
-        })
-      ])
-      .then(responseArray => {
-        setUserInfo(responseArray[0].data[0]);
-        let newRating = responseArray[0].data[0].ratings || 5.0;
+      .get(`/getUserProfile`, {
+        params: {
+          ID: username
+        }
+      })
+      .then(({ data }) => {
+        setUserInfo(data[0]);
+        const newRating = data[0] ? data[0].rating : 5.0;
         setRating(newRating);
-        setMentorSkills(responseArray[1].data);
-        setMenteeSkills(responseArray[2].data);
+        const mentorSkills = [];
+        const menteeSkills = [];
+        data.forEach(skill => {
+          if (skill.role === "mentor") {
+            mentorSkills.push(skill);
+          } else {
+            menteeSkills.push(skill);
+          }
+        });
+        setMentorSkills(mentorSkills);
+        setMenteeSkills(menteeSkills);
       })
       .catch(err => {
         console.error("request failed");
@@ -78,7 +78,15 @@ export default function UserProfile() {
         </div>
       </div>
       <div className="profileContact">
-        <Link to={`/chatbox/${target}`}>
+        <Link
+          to={{
+            pathname: `/chatbox/${username}`,
+            state: {
+              from_username: user_id,
+              to_username: username
+            }
+          }}
+        >
           <button>Send Message</button>
         </Link>
       </div>
@@ -89,7 +97,7 @@ export default function UserProfile() {
         {/* <ReviewsList /> */}
         <div className="profileSectionTitle">REVIEWS</div>
         <div className="reviewsContainer">YOU CAN'T ADD A REVIEW. YET.</div>
-        <Link to={`/review/${target}`}>
+        <Link to={`/review/${username}`}>
           <button>REVIEW LATER</button>
         </Link>
       </div>
