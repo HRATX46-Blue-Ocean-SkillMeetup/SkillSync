@@ -52,6 +52,7 @@ export default function ChatBox(props) {
 
   const addMessage = (user_id, message) => {
     dispatch({ type: "add-message", message, user_id });
+    setMessage("");
   };
 
   const addHistory = message => {
