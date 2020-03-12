@@ -34,16 +34,16 @@ body {
   border-radius: 4px;
   z-index: -1;
 }
-/* button {
+.login-container button {
   font-family: Roboto;
   font-size: 24px;
-  background: #F0F0F0;
+  background: #f0f0f0;
   border-radius: 4px;
   width: 190px;
   height: 39px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   z-index: 5;
-} */
+}
 
 .inputText {
   width: 50%;
@@ -60,6 +60,45 @@ body {
   font-style: italic;
   font-size: 18px;
   padding-left: 5px;
+}
+.login {
+  margin: 20vh 10%;
+}
+.signup {
+  margin: 5% 10%;
+}
+.login-container {
+  display: grid;
+  margin-top: 20px;
+}
+.login-field {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+input#username,
+input#password,
+input#email,
+input#location,
+input#bio,
+input#user_photo {
+  height: 40px;
+  padding: 3px 7px;
+  font: inherit;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid #a6a6a6;
+  border-top-color: #949494;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 0 rgba(0, 0, 0, 0.07) inset;
+  outline: 0;
+}
+input#bio {
+  height: 100px;
+}
+.mb-1 {
+  margin-bottom: 5%;
 }
 
 /* Front Page */
@@ -80,7 +119,7 @@ body {
 }
 .homeQuoteContainer {
   padding: 20px;
-  margin: 15px;
+  margin: 30px 15px 15px 15px;
   background: #e0f4fb;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -117,8 +156,8 @@ body {
   background-repeat: no-repeat;
 }
 .categoryIconList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 .categoryIconList .categorySquare {
   flex: 0 46%;
@@ -177,8 +216,12 @@ body {
   background: #ffffff;
   width: 100%;
   padding: 0 2%;
-  position: absolute;
-  top: 8%;
+  position: relative;
+  top: -1px;
+  z-index: 5;
+}
+.navDrawer a {
+  text-decoration: none;
 }
 .navLink:hover {
   color: #38755d;

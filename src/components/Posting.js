@@ -1,11 +1,10 @@
 import React from "react";
 import StarRating from "react-star-ratings";
 
-const Posting = ({ posting, handleSelectPost }) => {
+const Posting = ({ posting }) => {
   return (
     <div
       className="post"
-      onClick={e => handleSelectPost(e, posting.posting_id)}
     >
       <div className="post-image">
         <img src={posting.user_photo} />

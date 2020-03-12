@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import HamburgerMenu from "./HamburgerMenu";
 import axios from "axios";
 import Suggestion from "./Suggestion";
-import PostingList from "./PostingList";
+import { Link } from "react-router-dom";
 
-const Search = ({ handleSelectPost, handleNavDrawerClick }) => {
+const Search = ({ handleNavDrawerClick }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [postings, setPostings] = useState([]);
 
   useEffect(() => {
     if (searchTerm === "") {
@@ -40,44 +39,18 @@ const Search = ({ handleSelectPost, handleNavDrawerClick }) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSuggestionClick = e => {
-    const skill_id = e.target.value;
-    axios
-      .get("/postings", {
-        params: {
-          skill_id
-        }
-      })
-      .then(({ data }) => {
-        const postings = [];
-        data.forEach(skill => postings.push(skill));
-        setPostings(postings);
-        setShowSuggestions(false);
-      })
-      .catch(err => console.log(err));
+  const handleSuggestionClick = () => {
+    setShowSuggestions(false);
   };
 
-  const handleSearchClick = e => {
-    e.preventDefault();
-    axios
-      .get("/search/postings", {
-        params: {
-          searchTerm
-        }
-      })
-      .then(({ data }) => {
-        const postings = [];
-        data.forEach(skill => postings.push(skill));
-        setPostings(postings);
-        setShowSuggestions(false);
-      })
-      .catch(err => console.log(err));
+  const handleSearchClick = () => {
+    setShowSuggestions(false);
   };
 
   return (
     <div className="search">
       <div id="searchbar">
-        <HamburgerMenu handleNavDrawerClick={handleNavDrawerClick}/>
+        <HamburgerMenu handleNavDrawerClick={handleNavDrawerClick} />
         <form role="search" action="/q" acceptCharset="UTF-8" method="GET">
           <div className="search-layout">
             <div className="input-group">
@@ -95,14 +68,23 @@ const Search = ({ handleSelectPost, handleNavDrawerClick }) => {
                 onChange={e => handleChange(e)}
               ></input>
               <div className="input-group-btn">
-                <button
-                  aria-label="Search Submit"
-                  className="btn btn-default layout-navbar-search-btn"
-                  type="submit"
+                <Link
+                  to={{
+                    pathname: `/search/postings/`,
+                    state: {
+                      searchTerm
+                    }
+                  }}
                   onClick={handleSearchClick}
                 >
-                  <i className="fas fa-search"></i>
-                </button>
+                  <button
+                    aria-label="Search Submit"
+                    className="btn btn-default layout-navbar-search-btn"
+                    type="submit"
+                  >
+                    <i className="fas fa-search"></i>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -112,9 +94,10 @@ const Search = ({ handleSelectPost, handleNavDrawerClick }) => {
       <Suggestion
         searchSuggestions={searchSuggestions}
         showSuggestions={showSuggestions}
+        setShowSuggestions={setShowSuggestions}
         handleSuggestionClick={handleSuggestionClick}
+        searchTerm={searchTerm}
       />
-      <PostingList postings={postings} handleSelectPost={handleSelectPost} />
     </div>
   );
 };
