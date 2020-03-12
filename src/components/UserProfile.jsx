@@ -4,66 +4,68 @@ import { Link, useRouteMatch } from "react-router-dom";
 import { PrivateRoute } from "./Authentication/PrivateRoute.jsx";
 
 import axios from "axios";
+import Skills from "./userProfile/Skills";
+import WantSkills from "./userProfile/WantSkills";
+//import Reviews from "./Reviews";
+//import ReviewsList from "./ReviewsList";
+import StarRating from "react-star-ratings";
 
-import ChatBox from "./Authentication/ChatBox.jsx";
-
-let promises = [
-  axios.get(`http://localhost:3000/getUserProfile`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get(`http://localhost:3000/getAverageReviews`, {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMentorSkills", {
-    params: {
-      ID: 3
-    }
-  }),
-  axios.get("http://localhost:3000/getMenteeSkills", {
-    params: {
-      ID: 3
-    }
-  })
-];
-
-export default function UserProfile({ userId }) {
+export default function UserProfile({ otherUserId }) {
   const [userInfo, setUserInfo] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [menteeSkills, setMenteeSkills] = useState(["people"]);
-  const [mentorSkills, setMentorSkills] = useState(["skill"]);
+  const [rating, setRating] = useState(5);
+  const [mentorSkills, setMentorSkills] = useState(["ReactJS"]);
+  const [menteeSkills, setMenteeSkills] = useState(["Barbecuing"]);
   const target = "g";
 
   useEffect(() => {
     axios
-      .all(promises)
+      .all([
+        axios.get(`http://localhost:3000/getUserProfile`, {
+          params: {
+            ID: otherUserId
+          }
+        }),
+        axios.get("http://localhost:3000/getMentorSkills", {
+          params: {
+            ID: otherUserId
+          }
+        }),
+        axios.get("http://localhost:3000/getMenteeSkills", {
+          params: {
+            ID: otherUserId
+          }
+        })
+      ])
       .then(responseArray => {
         setUserInfo(responseArray[0].data[0]);
-        setRating(5.0);
-        setMentorSkills(responseArray[2].data);
-        setMenteeSkills(responseArray[3].data);
+        let newRating = responseArray[0].data[0].ratings || 5.0;
+        setRating(newRating);
+        setMentorSkills(responseArray[1].data);
+        setMenteeSkills(responseArray[2].data);
       })
       .catch(err => {
         console.error("request failed");
       });
   }, []);
-
   return (
     <div className="profileContainer">
       <div className="profileUserInfo">
         <div className="profileRow1">
           <span className="userPhotoProfile">
-            <img src={userInfo.user_photo} width="140" />
+            <img className="userProfile-image" src={userInfo.user_photo} />
+            <StarRating
+              rating={rating}
+              starRatedColor="#FF8C5B"
+              name="rating"
+              starDimension="25px"
+              starSpacing="1px"
+            />
             <br />
-            <span className="Rating">{rating} &#9733;</span> <br />
           </span>
           <span className="userBio">
             <span className="userFullName">{userInfo.username}</span> <br />
-            ZIP Code: {userInfo.location} <br />
-            Bio: {userInfo.bio} <br />
+            <div className="zip">{userInfo.location}</div>
+            <div className="bio">{userInfo.bio}</div> <br />
           </span>
         </div>
       </div>
@@ -72,22 +74,10 @@ export default function UserProfile({ userId }) {
         <Link to={`/chatbox/${target}`}>Send Message</Link>
       </div>
       <div className="skillsTeachContainer, clearBackground">
-        <div className="profileSectionTitle">SKILLS I TEACH</div>
-        <div className="skills">
-          {mentorSkills.map(skill => (
-            <div key={skill.skill}>{skill.skill}</div>
-          ))}
-        </div>
-      </div>
-      <div className="skillsLearnContainer, clearBackground">
-        <div className="profileSectionTitle">I WANT TO LEARN</div>
-        <div className="skills">
-          {menteeSkills.map(skills => (
-            <div key={skills.skill}>{skills.skill}</div>
-          ))}
-        </div>
-      </div>
-      <div className="reviewsContainer">
+        <Skills mentorSkills={mentorSkills} />
+        <WantSkills menteeSkills={menteeSkills} />
+        {/*<Reviews /> */}
+        {/* <ReviewsList /> */}
         <div className="profileSectionTitle">REVIEWS</div>
         <div className="reviewsContainer">YOU CAN'T ADD A REVIEW. YET.</div>
         <Link to={`/review/${target}`}>
@@ -97,3 +87,19 @@ export default function UserProfile({ userId }) {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -143,30 +143,8 @@ body {
 }
 /* User Profile */
 .profileRow1 {
-}
-.userPhotoProfile {
-  position: absolute;
-  width: 140px;
-  height: 130px;
-  left: calc(50% - 140px / 2 - 129px);
-  top: 79px;
 
-  /* background: url(photo-1551861568-c0afa6653bc1.jpg), url(photo-1551861568-c0afa6653bc1.jpg); */
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
 }
-.userBio {
-  position: absolute;
-  width: 253px;
-  height: 170px;
-  /* left: calc(50% - 253px/2 + 73.5px); */
-  /* top: 79px; */
-  background: #f0f0f0;
-  border-radius: 4px;
-}
-
 /* top bar */
 .notificationDot:before {
   content: " \25CF";
@@ -283,7 +261,74 @@ hr {
 }
 
 /* james */
-
+/* ---------- james*/
+.profileUserInfo {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.profileRow1 {
+  display: flex;
+  flex-direction: row;
+}
+.profileRow1 {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.userBio {
+  position: right;
+  margin-top: 5px;
+  height: 90%;
+  width: 55%;
+  background: #F0F0F0;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 200;
+  color: #656565;
+  box-sizing: border-box;
+}
+.skillsTeachContainer {
+  display: flex;
+  align-content: center;
+}
+.userProfile-image {
+  min-width: 150px;
+  height: 100%;
+}
+.userFullName {
+  font-size: 30px;
+  padding-left: 4px;
+}
+.zip {
+  font-size: 20px;
+  padding-left: 4px;
+}
+.bio {
+  font-size: 14px;
+  padding-top: 12px;
+  padding-left: 4px;
+}
+.star-ratings {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+.userPhotoProfile {
+  width: 154px;
+  height: 110px;
+  margin: 5px;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  position: relative;
+}
+.profileContact {
+  display: flex;
+  border-radius: 4px;
+}
 .userProfile-skills-container {
   display: flex;
   width: 100%;
@@ -292,19 +337,17 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-
 .userProfile-skills {
   display: flex;
-
   width: 98%;
-  height: 100px;
+  height: 30px;
   background: #237553;
   color: white;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  padding: 1px;
-  font-family: Roboto;
+  margin: 10px;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
@@ -314,7 +357,6 @@ hr {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-overSkill {
   display: flex;
   flex-direction: row;
@@ -329,8 +371,8 @@ hr {
   border-radius: 4px;
   padding: 1px;
   margin: 10px;
-  background: #ffffff;
-  font-family: Roboto;
+  background: #FFFFFF;
+  font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
   font-size: 18px;
@@ -338,12 +380,10 @@ hr {
   text-align: center;
   color: #656565;
 }
-
 .userProfile-overLearn {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-want-to-learn-container {
   display: flex;
   width: 100%;
@@ -352,29 +392,26 @@ hr {
   align-items: center;
   flex-direction: column;
 }
-
 .userProfile-want-to-learn {
   display: flex;
   width: 98%;
-  height: 100px;
+  height: 30px;
   background: #237553;
   color: white;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   margin: 10px;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
   line-height: 100%;
 }
-
 .userProfile-learn-skill-container {
   display: flex;
   flex-direction: row;
 }
-
 .userProfile-learn-skill {
   display: flex;
   flex-direction: row;
@@ -385,13 +422,51 @@ hr {
   border-radius: 4px;
   padding: 1px;
   margin: 10px;
-  background: #ffffff;
-  font-family: Roboto;
+  background: #FFFFFF;
+  font-family: "Roboto", sans-serif;
   font-style: italic;
   font-weight: 200;
   font-size: 18px;
   line-height: 100%;
   text-align: center;
   color: #656565;
+}
+.profileContact button {
+  display: flex;
+  background-color: white;
+  justify-content: space-around;
+  height: 40px;
+  width: 150px;
+}
+.reviewsListContainer {
+  display: flex;
+  flex-direction: column;
+}
+.reviewBox {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  margin-top: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  height: 100px;
+  /* background-color: #F0F0F0; */
+  background-color: black;
+}
+.starRatingReviews {
+  display: flex;
+  flex-direction: row;
+}
+.textReviewsList {
+  display: flex;
+  flex-direction: row;
+}
+.photoReviewsList {
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  width: 70px;
+  border-radius: 4px;
+  background: url(woman-yellow-shirt-smiling-1296x728.jpg);
 }
 /* ---------- james*/
