@@ -151,7 +151,7 @@ form {
   left: 22%;
   border: 1px solid #c5c5c5;
   width: 59.7%;
-  z-index: 2;
+  z-index: 6;
 }
 
 .suggestion-item {
