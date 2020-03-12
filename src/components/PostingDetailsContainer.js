@@ -16,13 +16,33 @@ function PostingDetailsContainer() {
     <div className="posting-bigContainer">
       <div className="posting-postingDetailsContainer">
         <div className="posting-smallContainer">
-          <div className="posting-userPhotoPosting">
-            <img src={user_photo} alt="" className="posting-image" />
-          </div>
+          <Link
+            to={{
+              pathname: `/profile/${username}`,
+              state: {
+                to_username: posting.user_id
+              }
+            }}
+          >
+            <div className="posting-userPhotoPosting">
+              <img src={user_photo} alt="" className="posting-image" />
+            </div>
+          </Link>
           <div>
-            <p className="posting-title">
-              <strong>{skill} </strong>lesson with {username}
-            </p>
+            <Link
+              to={{
+                pathname: `/profile/${username}`,
+                state: {
+                  to_username: posting.user_id
+                }
+              }}
+            >
+              <div className="posting-title-container">
+                <p className="posting-title">
+                  <strong>{skill} </strong>lesson with {username}
+                </p>
+              </div>
+            </Link>
             <Location location={posting.location} />
             <Rating rating={rating} />
           </div>
@@ -35,7 +55,6 @@ function PostingDetailsContainer() {
       </div>
       <div className="posting-buttonContainer">
         <Link
-          to={`/chatbox/${username}`}
           to={{
             pathname: `/chatbox/${username}`,
             state: {
