@@ -28,7 +28,7 @@ function reducer(state, action) {
   }
 }
 
-const baseURL = "https://skillsync.herokuapp.com";
+const baseURL = "https://skillsync.herokuapp.com/";
 
 export default function ChatBox(props) {
   const context = useContext(UserState);
